@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - APSE Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header class="header" id="header">
+        <!-- ... header content ... -->
+    </header>
+
+    <!-- Product Details -->
+    <section class="product-details-section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="shop.html">Shop</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="#" id="breadcrumbCategory">Cameras</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumbProduct">Sony A7 III</span>
+            </div>
+
+            <div class="product-details-wrapper">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="gallery-main">
+                        <img id="mainProductImage" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600" alt="Product">
+                        <button class="wishlist-btn" onclick="toggleWishlist()">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="share-btn" onclick="shareProduct()">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <div class="gallery-thumbnails" id="galleryThumbnails">
+                        <!-- Thumbnails will be loaded -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-details-info">
+                    <div class="product-brand" id="productBrand">Sony</div>
+                    <h1 class="product-title" id="productName">Sony A7 III Mirrorless Camera</h1>
+                    
+                    <div class="product-rating-large">
+                        <div class="stars" id="productRating">★★★★½</div>
+                        <a href="#reviews" class="reviews-link">(156 reviews)</a>
+                    </div>
+
+                    <div class="product-price-large" id="productPrice">
+                        <span class="current-price">$1,999.99</span>
+                        <span class="original-price">$2,299.99</span>
+                        <span class="discount-badge">Save $300 (13%)</span>
+                    </div>
+
+                    <div class="product-availability">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="productStock">In Stock</span>
+                        <span class="sku">SKU: SONY-A7III-2024</span>
+                    </div>
+
+                    <div class="product-short-description" id="productDescription">
+                        Full-frame mirrorless camera with 24.2MP sensor and 4K video capabilities. Perfect for both photography and videography enthusiasts.
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label>Kit Options:</label>
+                            <div class="option-buttons">
+                                <button class="option-btn active">Body Only</button>
+                                <button class="option-btn">With 28-70mm Lens</button>
+                                <button class="option-btn">With 24-105mm Lens</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Color:</label>
+                            <div class="color-options">
+                                <span class="color-option" style="background: #000;" data-color="black"></span>
+                                <span class="color-option" style="background: #ccc;" data-color="silver"></span>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Warranty:</label>
+                            <select class="warranty-select">
+                                <option>1 Year Standard Warranty (Included)</option>
+                                <option>2 Year Extended Warranty (+$99)</option>
+                                <option>3 Year Premium Warranty (+$199)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-quantity">
+                        <label>Quantity:</label>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions-large">
+                        <button class="btn btn-primary btn-large" onclick="addToCart()">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-secondary btn-large" onclick="buyNow()">
+                            Buy Now
+                        </button>
+                        <button class="btn btn-outline btn-icon" onclick="addToCompare()">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                    </div>
+
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Free shipping on orders over $99</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-undo-alt"></i>
+                            <span>30-day easy returns</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>2-year warranty included</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-nav active" data-tab="description">Description</button>
+                    <button class="tab-nav" data-tab="specs">Specifications</button>
+                    <button class="tab-nav" data-tab="reviews">Reviews (156)</button>
+                    <button class="tab-nav" data-tab="shipping">Shipping & Returns</button>
+                </div>
+
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="tab-description">
+                        <div class="description-content">
+                            <h3>Product Description</h3>
+                            <p>The Sony A7 III combines high-performance imaging with professional-grade video capabilities in a compact mirrorless body. Its 24.2MP back-illuminated full-frame sensor delivers exceptional image quality with remarkable clarity and low noise, even in challenging lighting conditions.</p>
+                            
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>24.2MP Full-frame Exmor R CMOS sensor</li>
+                                <li>BIONZ X image processor</li>
+                                <li>4K HDR video recording</li>
+                                <li>5-axis in-body image stabilization</li>
+                                <li>693-point phase-detection AF system</li>
+                                <li>10fps continuous shooting with AF/AE tracking</li>
+                                <li>High-contrast 2.36M-dot OLED viewfinder</li>
+                                <li>3.0" 922k-dot tilting LCD touchscreen</li>
+                                <li>Dual SD card slots (UHS-II compatible)</li>
+                                <li>Weather-sealed magnesium alloy body</li>
+                            </ul>
+
+                            <h4>Perfect for:</h4>
+                            <p>Whether you're shooting portraits, landscapes, or fast-moving subjects, the A7 III's advanced autofocus system and high-speed continuous shooting ensure you never miss a moment. Its exceptional low-light performance makes it ideal for wedding and event photography, while 4K video capabilities cater to videographers and content creators.</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab-specs">
+                        <div class="specs-table">
+                            <h3>Technical Specifications</h3>
+                            <table>
+                                <tr>
+                                    <td>Sensor Type</td>
+                                    <td>35mm full-frame Exmor R CMOS</td>
+                                </tr>
+                                <tr>
+                                    <td>Effective Pixels</td>
+                                    <td>24.2 megapixels</td>
+                                </tr>
+                                <tr>
+                                    <td>Image Processor</td>
+                                    <td>BIONZ X</td>
+                                </tr>
+                                <tr>
+                                    <td>ISO Sensitivity</td>
+                                    <td>100-51200 (expandable to 50-204800)</td>
+                                </tr>
+                                <tr>
+                                    <td>Image Stabilization</td>
+                                    <td>5-axis sensor-shift (up to 5 stops)</td>
+                                </tr>
+                                <tr>
+                                    <td>Autofocus Points</td>
+                                    <td>693 phase-detection, 425 contrast-detection</td>
+                                </tr>
+                                <tr>
+                                    <td>Continuous Shooting</td>
+                                    <td>Up to 10 fps with AF/AE tracking</td>
+                                </tr>
+                                <tr>
+                                    <td>Video Recording</td>
+                                    <td>4K 30p, 1080p 120p</td>
+                                </tr>
+                                <tr>
+                                    <td>Viewfinder</td>
+                                    <td>0.5" OLED, 2.36M dots</td>
+                                </tr>
+                                <tr>
+                                    <td>LCD Screen</td>
+                                    <td>3.0" tilting touchscreen, 922k dots</td>
+                                </tr>
+                                <tr>
+                                    <td>Storage</td>
+                                    <td>2x SD (1x UHS-II compatible)</td>
+                                </tr>
+                                <tr>
+                                    <td>Battery Life</td>
+                                    <td>Up to 710 shots (viewfinder)</td>
+                                </tr>
+                                <tr>
+                                    <td>Dimensions</td>
+                                    <td>126.9 x 95.6 x 73.7mm</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>650g (with battery and card)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab-reviews">
+                        <div class="reviews-container">
+                            <div class="reviews-summary">
+                                <div class="average-rating">
+                                    <span class="big-rating">4.8</span>
+                                    <div class="stars">★★★★★</div>
+                                    <span>156 verified reviews</span>
+                                </div>
+                                <div class="rating-bars">
+                                    <div class="rating-bar">
+                                        <span>5 stars</span>
+                                        <div class="bar"><div style="width: 85%"></div></div>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>4 stars</span>
+                                        <div class="bar"><div style="width: 10%"></div></div>
+                                        <span>10%</span>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>3 stars</span>
+                                        <div class="bar"><div style="width: 3%"></div></div>
+                                        <span>3%</span>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>2 stars</span>
+                                        <div class="bar"><div style="width: 1%"></div></div>
+                                        <span>1%</span>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>1 star</span>
+                                        <div class="bar"><div style="width: 1%"></div></div>
+                                        <span>1%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reviews-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="John">
+                                        <div>
+                                            <h4>John Smith</h4>
+                                            <div class="stars">★★★★★</div>
+                                        </div>
+                                        <span class="review-date">2 weeks ago</span>
+                                    </div>
+                                    <p class="review-text">Amazing camera! The autofocus is incredibly fast and accurate. Image quality is outstanding, especially in low light. Highly recommend!</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah">
+                                        <div>
+                                            <h4>Sarah Johnson</h4>
+                                            <div class="stars">★★★★½</div>
+                                        </div>
+                                        <span class="review-date">1 month ago</span>
+                                    </div>
+                                    <p class="review-text">Great all-around camera. Video capabilities are excellent, and the battery life is impressive. The menu system takes some getting used to though.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab-shipping">
+                        <div class="shipping-info">
+                            <h3>Shipping Information</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Free standard shipping on orders over $99</li>
+                                <li><i class="fas fa-check"></i> Express shipping available (2-3 business days) - $15</li>
+                                <li><i class="fas fa-check"></i> Next day delivery available - $25</li>
+                                <li><i class="fas fa-check"></i> International shipping available - Calculated at checkout</li>
+                            </ul>
+
+                            <h3>Return Policy</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> 30-day easy returns</li>
+                                <li><i class="fas fa-check"></i> Free return shipping</li>
+                                <li><i class="fas fa-check"></i> Full refund or exchange</li>
+                                <li><i class="fas fa-check"></i> Items must be in original condition</li>
+                            </ul>
+
+                            <h3>Warranty</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> 2-year manufacturer warranty included</li>
+                                <li><i class="fas fa-check"></i> Extended warranty options available</li>
+                                <li><i class="fas fa-check"></i> Accidental damage coverage available</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <section class="related-products">
+                <h2>You May Also Like</h2>
+                <div class="products-grid" id="relatedProducts">
+                    <!-- Related products will be loaded -->
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <!-- ... footer content ... -->
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js"></script>
+</body>
+</html>

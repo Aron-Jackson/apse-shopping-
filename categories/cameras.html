@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameras - APSE Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/category.css">
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header class="header" id="header">
+        <!-- ... header content ... -->
+    </header>
+
+    <!-- Category Banner -->
+    <section class="category-banner">
+        <div class="container">
+            <div class="category-banner-content">
+                <h1>Cameras & Photography</h1>
+                <p>Capture life's precious moments with our premium cameras</p>
+                <div class="category-stats">
+                    <span><i class="fas fa-camera"></i> 250+ Products</span>
+                    <span><i class="fas fa-tag"></i> Up to 40% Off</span>
+                    <span><i class="fas fa-truck"></i> Free Shipping</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Subnav -->
+    <div class="category-subnav">
+        <div class="container">
+            <ul>
+                <li><a href="#dslr" class="active">DSLR Cameras</a></li>
+                <li><a href="#mirrorless">Mirrorless Cameras</a></li>
+                <li><a href="#action">Action Cameras</a></li>
+                <li><a href="#compact">Compact Cameras</a></li>
+                <li><a href="#lenses">Lenses</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Category Content -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-layout">
+                <!-- Sidebar Filters -->
+                <aside class="category-sidebar">
+                    <div class="filter-widget">
+                        <h3>Brands</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="sony"> Sony (45)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="canon"> Canon (38)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="nikon"> Nikon (32)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="fujifilm"> Fujifilm (28)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="panasonic"> Panasonic (24)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="leica"> Leica (12)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Price Range</h3>
+                        <div class="price-range">
+                            <input type="range" id="priceSlider" min="0" max="5000" step="100" value="2500">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$<span id="priceValue">2500</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Sensor Type</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="full-frame"> Full-Frame (56)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="aps-c"> APS-C (48)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="micro-four-thirds"> Micro Four Thirds (32)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="medium-format"> Medium Format (15)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Megapixels</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="20-30"> 20-30 MP (45)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="30-40"> 30-40 MP (38)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="40-50"> 40-50 MP (32)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="50+"> 50+ MP (24)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Video Resolution</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="4k"> 4K (78)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="6k"> 6K (45)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="8k"> 8K (32)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Features</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="wifi"> Wi-Fi (89)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="bluetooth"> Bluetooth (76)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="touchscreen"> Touchscreen (67)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="weather-sealed"> Weather Sealed (54)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="image-stabilization"> Image Stabilization (92)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary apply-filters">Apply Filters</button>
+                    <button class="btn btn-outline clear-filters">Clear All</button>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="category-products">
+                    <div class="category-toolbar">
+                        <div class="results-count">
+                            Showing <span id="startCount">1</span>-<span id="endCount">12</span> of <span id="totalCount">156</span> results
+                        </div>
+                        <div class="sort-options">
+                            <label for="sortBy">Sort by:</label>
+                            <select id="sortBy">
+                                <option value="default">Featured</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name-asc">Name: A to Z</option>
+                                <option value="name-desc">Name: Z to A</option>
+                                <option value="rating">Top Rated</option>
+                            </select>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="categoryProducts">
+                        <!-- Products will be loaded dynamically -->
+                    </div>
+
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Features -->
+    <section class="category-features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-camera-retro"></i>
+                    <h3>Expert Advice</h3>
+                    <p>Get professional photography advice</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Camera Workshops</h3>
+                    <p>Free workshops with purchase</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-wrench"></i>
+                    <h3>Repair Services</h3>
+                    <p>Professional camera repair</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Trade-In Program</h3>
+                    <p>Get up to $500 for your old gear</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <!-- ... footer content ... -->
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/category.js"></script>
+</body>
+</html>

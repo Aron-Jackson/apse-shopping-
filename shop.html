@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Same header as index.html -->
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Shop</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Shop</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Sidebar Filters -->
+                <aside class="shop-sidebar">
+                    <div class="filter-widget">
+                        <h3>Categories</h3>
+                        <ul class="category-filter" id="categoryFilter">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Price Range</h3>
+                        <div class="price-filter">
+                            <input type="range" id="priceRange" min="0" max="1000" step="10" value="500">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$<span id="priceValue">500</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Brands</h3>
+                        <div class="brand-filter" id="brandFilter">
+                            <!-- Brands will be loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="filter-widget">
+                        <h3>Rating</h3>
+                        <div class="rating-filter" id="ratingFilter">
+                            <label><input type="checkbox" value="4"> 4★ & above</label>
+                            <label><input type="checkbox" value="3"> 3★ & above</label>
+                            <label><input type="checkbox" value="2"> 2★ & above</label>
+                            <label><input type="checkbox" value="1"> 1★ & above</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary apply-filters">Apply Filters</button>
+                    <button class="btn btn-outline clear-filters">Clear All</button>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="shop-content">
+                    <div class="shop-toolbar">
+                        <div class="results-count">
+                            Showing <span id="startCount">1</span>-<span id="endCount">12</span> of <span id="totalCount">48</span> results
+                        </div>
+                        <div class="sort-options">
+                            <label for="sortBy">Sort by:</label>
+                            <select id="sortBy">
+                                <option value="default">Default</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name-asc">Name: A to Z</option>
+                                <option value="name-desc">Name: Z to A</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded dynamically -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be generated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <!-- Same footer as index.html -->
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html>
