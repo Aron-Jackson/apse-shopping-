@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Arrivals - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; min-height: 100vh;">
+
+    <!-- Header -->
+    <div style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <h1 style="margin: 0; font-size: 24px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    APSE <span style="font-weight: 300;">New</span>
+                </h1>
+            </div>
+            
+            <!-- Release Countdown -->
+            <div style="background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); padding: 8px 20px; border-radius: 30px; color: white; font-weight: 600;">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="releaseTimer">This Week's Drops</span>
+            </div>
+            
+            <div style="display: flex; gap: 25px; align-items: center;">
+                <a href="wishlist.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="far fa-heart" style="font-size: 22px;"></i>
+                    <span id="wishlistCount" style="position: absolute; top: -8px; right: -8px; background: #3498db; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="fas fa-shopping-cart" style="font-size: 22px;"></i>
+                    <span id="cartCount" style="position: absolute; top: -8px; right: -8px; background: #3498db; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div style="background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); padding: 80px 20px; text-align: center; position: relative; overflow: hidden;">
+        <!-- Animated Background -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1;">
+            <div style="position: absolute; top: 10%; left: 10%; width: 200px; height: 200px; background: white; border-radius: 50%; animation: float 6s infinite;"></div>
+            <div style="position: absolute; bottom: 10%; right: 10%; width: 150px; height: 150px; background: white; border-radius: 50%; animation: float 8s infinite reverse;"></div>
+            <div style="position: absolute; top: 50%; left: 50%; width: 100px; height: 100px; background: white; border-radius: 50%; animation: float 4s infinite;"></div>
+        </div>
+        
+        <div style="max-width: 800px; margin: 0 auto; position: relative;">
+            <span style="background: rgba(255,255,255,0.2); color: white; padding: 8px 25px; border-radius: 30px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 20px; backdrop-filter: blur(5px);">
+                <i class="fas fa-star"></i> JUST LANDED
+            </span>
+            <h1 style="margin: 0; color: white; font-size: 72px; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                NEW ARRIVALS
+            </h1>
+            <p style="color: white; font-size: 24px; margin: 20px 0; opacity: 0.9;">Be the first to shop the latest trends</p>
+            
+            <!-- Weekly Stats -->
+            <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+                <div style="text-align: center;">
+                    <div style="background: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: #3498db; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="newThisWeek">156</div>
+                    <div style="color: white; margin-top: 10px; font-weight: 500;">New This Week</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: #2ecc71; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="comingSoon">24</div>
+                    <div style="color: white; margin-top: 10px; font-weight: 500;">Coming Soon</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: #e74c3c; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="limitedEditions">12</div>
+                    <div style="color: white; margin-top: 10px; font-weight: 500;">Limited Editions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div style="max-width: 1400px; margin: 40px auto; padding: 0 20px;">
+        
+        <!-- Time Period Tabs -->
+        <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="filterByTime('today')" class="time-tab active" style="padding: 12px 25px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-sun"></i> Today's Drops
+                    </button>
+                    <button onclick="filterByTime('week')" class="time-tab" style="padding: 12px 25px; background: white; border: 2px solid #3498db; color: #3498db; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-calendar-week"></i> This Week
+                    </button>
+                    <button onclick="filterByTime('month')" class="time-tab" style="padding: 12px 25px; background: white; border: 2px solid #3498db; color: #3498db; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-calendar-alt"></i> This Month
+                    </button>
+                    <button onclick="filterByTime('preorder')" class="time-tab" style="padding: 12px 25px; background: white; border: 2px solid #3498db; color: #3498db; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-clock"></i> Pre-Order
+                    </button>
+                </div>
+                
+                <!-- Sort Options -->
+                <div style="display: flex; gap: 15px;">
+                    <select id="sortBy" style="padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 25px; font-size: 14px; outline: none;" onchange="sortNewArrivals(this.value)">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                    
+                    <div style="display: flex; gap: 5px; border: 2px solid #e0e0e0; border-radius: 25px; overflow: hidden;">
+                        <button onclick="setView('grid')" id="gridViewBtn" style="padding: 12px 15px; background: #3498db; color: white; border: none; cursor: pointer;">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button onclick="setView('list')" id="listViewBtn" style="padding: 12px 15px; background: white; color: #666; border: none; cursor: pointer;">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Launch of the Day -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 40px; margin-bottom: 40px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative;">
+                <div>
+                    <span style="background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 20px;">
+                        <i class="fas fa-rocket"></i> FEATURED LAUNCH
+                    </span>
+                    <h2 style="color: white; font-size: 42px; margin: 0 0 20px 0;">iPhone 15 Pro Max</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 30px; line-height: 1.6;">
+                        The newest flagship with titanium design, A17 Pro chip, and revolutionary camera system.
+                    </p>
+                    
+                    <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 30px;">
+                        <div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">Launch Price</div>
+                            <div style="color: white; font-size: 48px; font-weight: 700;">$1,199</div>
+                        </div>
+                        <div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">Available</div>
+                            <div style="color: white; font-size: 20px;">Oct 15</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <button onclick="preorderNow(1)" style="padding: 15px 40px; background: white; color: #667eea; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <i class="fas fa-clock"></i> Pre-Order Now
+                        </button>
+                        <button onclick="notifyMe(1)" style="padding: 15px 30px; background: transparent; border: 2px solid white; color: white; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='#667eea'" onmouseout="this.style.background='transparent'; this.style.color='white'">
+                            Notify Me
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" alt="iPhone 15 Pro Max" style="max-width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    
+                    <!-- Pre-order Count -->
+                    <div style="background: rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; color: white; margin-bottom: 10px;">
+                            <span>🔥 Pre-Orders</span>
+                            <span>2,345 already</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.3); border-radius: 5px; overflow: hidden;">
+                            <div style="width: 75%; height: 100%; background: white; border-radius: 5px; animation: pulse 2s infinite;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Drops Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 32px; color: #333; margin: 0;">
+                    <i class="fas fa-sun" style="color: #f39c12;"></i> Today's Drops
+                    <span style="font-size: 16px; background: #3498db; color: white; padding: 5px 15px; border-radius: 20px; margin-left: 15px;">12 New Items</span>
+                </h2>
+                <a href="#" style="color: #3498db; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">View All →</a>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <!-- Today's Drop 1 -->
+                <div class="product-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #f39c12; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-sun"></i> JUST DROPPED
+                    </div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" onclick="toggleWishlist(101, event)">
+                        <i class="far fa-heart" style="color: #ff6b6b;"></i>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="New Headphones" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <div style="font-size: 12px; color: #3498db; margin-bottom: 5px;">Sony</div>
+                        <h3 style="margin: 0 0 10px 0; font-size: 16px;">WH-1000XM5 Headphones</h3>
+                        
+                        <div style="color: #f1c40f; margin-bottom: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span style="color: #999; margin-left: 5px;">(24)</span>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #3498db;">$399.99</span>
+                        </div>
+                        
+                        <button onclick="addToCart(101)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Today's Drop 2 -->
+                <div class="product-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #f39c12; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-sun"></i> JUST DROPPED
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="New Watch" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <div style="font-size: 12px; color: #3498db; margin-bottom: 5px;">Apple</div>
+                        <h3 style="margin: 0 0 10px 0; font-size: 16px;">Watch Series 9</h3>
+                        
+                        <div style="color: #f1c40f; margin-bottom: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span style="color: #999; margin-left: 5px;">(56)</span>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #3498db;">$429.99</span>
+                        </div>
+                        
+                        <button onclick="addToCart(102)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Today's Drop 3 -->
+                <div class="product-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #f39c12; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-sun"></i> JUST DROPPED
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="New Shoes" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <div style="font-size: 12px; color: #3498db; margin-bottom: 5px;">Nike</div>
+                        <h3 style="margin: 0 0 10px 0; font-size: 16px;">Air Max Pulse</h3>
+                        
+                        <div style="color: #f1c40f; margin-bottom: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            <span style="color: #999; margin-left: 5px;">(18)</span>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #3498db;">$179.99</span>
+                        </div>
+                        
+                        <button onclick="addToCart(103)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Today's Drop 4 -->
+                <div class="product-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #f39c12; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-sun"></i> JUST DROPPED
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" alt="New Perfume" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <div style="font-size: 12px; color: #3498db; margin-bottom: 5px;">Dior</div>
+                        <h3 style="margin: 0 0 10px 0; font-size: 16px;">Sauvage Elixir</h3>
+                        
+                        <div style="color: #f1c40f; margin-bottom: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span style="color: #999; margin-left: 5px;">(32)</span>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #3498db;">$159.99</span>
+                        </div>
+                        
+                        <button onclick="addToCart(104)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- This Week's Highlights -->
+        <div style="margin-bottom: 50px;">
+            <h2 style="font-size: 32px; color: #333; margin-bottom: 20px;">
+                <i class="fas fa-calendar-week" style="color: #3498db;"></i> This Week's Highlights
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
+                <!-- Highlight 1 - Large -->
+                <div style="grid-column: span 2; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 30px; display: flex; align-items: center; gap: 30px;">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" alt="MacBook" style="width: 200px; height: 200px; border-radius: 10px; object-fit: cover;">
+                    <div>
+                        <span style="background: rgba(255,255,255,0.2); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px;">COMING WEDNESDAY</span>
+                        <h3 style="color: white; font-size: 28px; margin: 15px 0;">New MacBook Air</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">M3 chip, 15-inch display, and all-day battery life.</p>
+                        <button onclick="notifyMe(105)" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Notify Me</button>
+                    </div>
+                </div>
+                
+                <!-- Highlight 2 -->
+                <div style="background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); border-radius: 15px; padding: 25px; text-align: center;">
+                    <i class="fas fa-clock" style="font-size: 48px; color: white; margin-bottom: 15px;"></i>
+                    <h3 style="color: white; margin: 0 0 10px 0;">Weekly Drop</h3>
+                    <div style="color: white; font-size: 36px; font-weight: 700;" id="weeklyCountdown">3d 12h</div>
+                    <p style="color: rgba(255,255,255,0.9); margin-top: 10px;">Until next release</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limited Editions Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-radius: 20px; padding: 30px; margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="background: white; color: #e74c3c; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: 600;">⚠️ LIMITED STOCK</span>
+                        <h2 style="color: white; font-size: 36px; margin: 15px 0 5px 0;">Limited Editions</h2>
+                        <p style="color: rgba(255,255,255,0.9);">Only 100 pieces worldwide. Once they're gone, they're gone.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: white; border-radius: 15px; padding: 20px;">
+                            <span style="display: block; font-size: 48px; font-weight: 700; color: #e74c3c;">12</span>
+                            <span style="color: #666;">Items Left</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <!-- Limited Edition 1 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-crown"></i> LIMITED (50 left)
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400" alt="Limited Watch" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <h3 style="margin: 0 0 10px 0;">Gold Edition Watch</h3>
+                        <div style="font-size: 20px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$2,499</div>
+                        <button onclick="addToCart(106)" style="width: 100%; padding: 12px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Secure Yours
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Limited Edition 2 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-crown"></i> LIMITED (32 left)
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400" alt="Limited Shoes" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <h3 style="margin: 0 0 10px 0;">Air Jordan 1 Retro</h3>
+                        <div style="font-size: 20px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$1,899</div>
+                        <button onclick="addToCart(107)" style="width: 100%; padding: 12px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Secure Yours
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Limited Edition 3 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-crown"></i> LIMITED (18 left)
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400" alt="Limited Camera" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <h3 style="margin: 0 0 10px 0;">Leica M11 Edition</h3>
+                        <div style="font-size: 20px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$8,999</div>
+                        <button onclick="addToCart(108)" style="width: 100%; padding: 12px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Secure Yours
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Limited Edition 4 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; font-size: 12px;">
+                        <i class="fas fa-crown"></i> LIMITED (5 left)
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" alt="Limited Perfume" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 15px;">
+                        <h3 style="margin: 0 0 10px 0;">Creed Aventus Gold</h3>
+                        <div style="font-size: 20px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$599</div>
+                        <button onclick="addToCart(109)" style="width: 100%; padding: 12px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Secure Yours
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pre-Order Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 32px; color: #333; margin: 0;">
+                    <i class="fas fa-clock" style="color: #f39c12;"></i> Available for Pre-Order
+                </h2>
+                <span style="background: #f39c12; color: white; padding: 5px 15px; border-radius: 20px;">Early bird discounts available</span>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <!-- Pre-Order 1 -->
+                <div style="background: white; border-radius: 15px; padding: 20px; display: flex; gap: 20px; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=200" alt="Gaming Laptop" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0 0 5px 0;">ASUS ROG Zephyrus</h4>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">RTX 4090 · 32GB RAM</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #3498db; margin-bottom: 10px;">$2,899</div>
+                        <div style="display: flex; gap: 10px;">
+                            <span style="background: #f39c12; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px;">-10% Early</span>
+                            <span style="color: #666; font-size: 12px;">Ships Nov 15</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pre-Order 2 -->
+                <div style="background: white; border-radius: 15px; padding: 20px; display: flex; gap: 20px; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200" alt="Smart Watch" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0 0 5px 0;">Samsung Galaxy Watch 6</h4>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Classic · LTE</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #3498db; margin-bottom: 10px;">$399</div>
+                        <div style="display: flex; gap: 10px;">
+                            <span style="background: #f39c12; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px;">Free Band</span>
+                            <span style="color: #666; font-size: 12px;">Ships Oct 20</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pre-Order 3 -->
+                <div style="background: white; border-radius: 15px; padding: 20px; display: flex; gap: 20px; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=200" alt="Gaming Chair" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0 0 5px 0;">Secretlab Titan Evo</h4>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">2024 Edition</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #3498db; margin-bottom: 10px;">$549</div>
+                        <div style="display: flex; gap: 10px;">
+                            <span style="background: #f39c12; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px;">Free Pillow</span>
+                            <span style="color: #666; font-size: 12px;">Ships Dec 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Grid -->
+        <div style="margin-bottom: 50px;">
+            <h2 style="font-size: 28px; color: #333; margin-bottom: 20px;">Shop by Category</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px;">
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                    <i class="fas fa-mobile-alt" style="font-size: 32px; color: #3498db;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Electronics</h4>
+                    <span style="color: #666; font-size: 12px;">24 new</span>
+                </div>
+                
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-tshirt" style="font-size: 32px; color: #e74c3c;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Fashion</h4>
+                    <span style="color: #666; font-size: 12px;">56 new</span>
+                </div>
+                
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-home" style="font-size: 32px; color: #2ecc71;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Home</h4>
+                    <span style="color: #666; font-size: 12px;">18 new</span>
+                </div>
+                
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-shoe-prints" style="font-size: 32px; color: #f39c12;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Sports</h4>
+                    <span style="color: #666; font-size: 12px;">15 new</span>
+                </div>
+                
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-book" style="font-size: 32px; color: #9b59b6;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Books</h4>
+                    <span style="color: #666; font-size: 12px;">32 new</span>
+                </div>
+                
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-gamepad" style="font-size: 32px; color: #e67e22;"></i>
+                    <h4 style="margin: 10px 0 5px 0;">Gaming</h4>
+                    <span style="color: #666; font-size: 12px;">12 new</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter for New Arrivals -->
+        <div style="background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); border-radius: 20px; padding: 50px; text-align: center; margin-bottom: 30px;">
+            <h2 style="color: white; font-size: 36px; margin: 0 0 15px 0;">Never Miss a New Arrival</h2>
+            <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 30px;">Be the first to know about new products and exclusive launches</p>
+            
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div style="display: flex; gap: 10px;">
+                    <input type="email" placeholder="Enter your email" style="flex: 1; padding: 15px; border: none; border-radius: 10px; font-size: 16px; outline: none;">
+                    <button style="padding: 15px 30px; background: #2c3e50; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer;" onmouseover="this.style.background='#34495e'" onmouseout="this.style.background='#2c3e50'">
+                        Subscribe
+                    </button>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 15px;">
+                    By subscribing, you agree to receive marketing emails from APSE Shopping.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalSlide 0.3s ease;">
+            <button onclick="closeQuickView()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; font-size: 24px; cursor: pointer; color: #666; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="quickViewContent" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 40px;">
+                <!-- Quick view content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notify Modal -->
+    <div id="notifyModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; padding: 40px; width: 90%; max-width: 400px; text-align: center; animation: modalSlide 0.3s ease;">
+            <i class="fas fa-bell" style="font-size: 48px; color: #3498db; margin-bottom: 20px;"></i>
+            <h3 style="margin: 0 0 10px 0;">Get Notified</h3>
+            <p style="color: #666; margin-bottom: 25px;">We'll let you know when this item is available</p>
+            <input type="email" id="notifyEmail" placeholder="Your email address" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; margin-bottom: 15px; box-sizing: border-box;">
+            <button onclick="submitNotify()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Notify Me</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; padding: 60px 0 20px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">New Arrivals</h3>
+                    <p style="color: #bdc3c7; line-height: 1.8;">Stay ahead of the curve with our latest products. Updated daily with the newest trends and innovations.</p>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Today's Drops</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">This Week</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Pre-Orders</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Limited Editions</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Customer Service</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">FAQ</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Shipping</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Follow Us</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #bdc3c7; font-size: 24px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 24px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 24px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #34495e;">
+                <p style="color: #bdc3c7; margin: 0;">&copy; 2026 APSE Shopping. Always Fresh, Always New.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Styles -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .product-card {
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52,152,219,0.15) !important;
+        }
+        
+        .time-tab {
+            transition: all 0.3s;
+        }
+        
+        .time-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52,152,219,0.3);
+        }
+        
+        .time-tab.active {
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+        }
+        
+        .new-badge {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            animation: shimmer 2s infinite;
+            background-size: 200% 100%;
+        }
+        
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
+        }
+        
+        @media (max-width: 1024px) {
+            div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(6, 1fr)"] {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .featured-launch {
+                flex-direction: column !important;
+            }
+            
+            div[style*="display: flex; gap: 10px;"] {
+                flex-wrap: wrap !important;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // Cart and wishlist data
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        let currentView = 'grid';
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            startCountdowns();
+            updateStats();
+        });
+
+        // Update cart and wishlist counts
+        function updateCounts() {
+            const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = cartCount;
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('newThisWeek').textContent = '156';
+            document.getElementById('comingSoon').textContent = '24';
+            document.getElementById('limitedEditions').textContent = '12';
+        }
+
+        // Start countdowns
+        function startCountdowns() {
+            // Weekly countdown
+            const weeklyEnd = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // 3 days from now
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = weeklyEnd - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                document.getElementById('weeklyCountdown').textContent = `${days}d ${hours}h`;
+            }, 1000);
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = getProductById(productId);
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: productId, quantity: 1, name: product.name, price: product.price, image: product.image });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCounts();
+            showToast('Added to cart!', 'success');
+        }
+
+        // Toggle wishlist
+        function toggleWishlist(productId, event) {
+            event.stopPropagation();
+            
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                showToast('Removed from wishlist', 'info');
+            } else {
+                wishlist.push(productId);
+                showToast('Added to wishlist!', 'success');
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateCounts();
+        }
+
+        // Pre-order now
+        function preorderNow(productId) {
+            addToCart(productId);
+            showToast('Pre-order placed! You\'ll be notified when it ships.', 'success');
+        }
+
+        // Notify me
+        function notifyMe(productId) {
+            document.getElementById('notifyModal').style.display = 'flex';
+        }
+
+        // Submit notify
+        function submitNotify() {
+            const email = document.getElementById('notifyEmail').value;
+            if (email) {
+                showToast('Notification set! We\'ll email you when available.', 'success');
+                closeNotifyModal();
+            } else {
+                showToast('Please enter your email', 'error');
+            }
+        }
+
+        // Close notify modal
+        function closeNotifyModal() {
+            document.getElementById('notifyModal').style.display = 'none';
+        }
+
+        // Quick view
+        function quickView(productId) {
+            const product = getProductById(productId);
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+            
+            content.innerHTML = `
+                <div>
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; border-radius: 10px;">
+                </div>
+                <div>
+                    <span style="background: #3498db; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 15px;">NEW ARRIVAL</span>
+                    <h2 style="margin: 0 0 15px 0;">${product.name}</h2>
+                    <div style="font-size: 36px; font-weight: 700; color: #3498db; margin-bottom: 15px;">$${product.price}</div>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">The latest addition to our collection. Premium quality and modern design.</p>
+                    <button onclick="addToCart(${productId}); closeQuickView()" style="padding: 15px 40px; background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        // Close quick view
+        function closeQuickView() {
+            document.getElementById('quickViewModal').style.display = 'none';
+        }
+
+        // Filter by time
+        function filterByTime(period) {
+            document.querySelectorAll('.time-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.background = 'white';
+                tab.style.color = '#3498db';
+            });
+            
+                   event.target.classList.add('active');
+            event.target.style.background = 'linear-gradient(135deg, #3498db 0%, #2ecc71 100%)';
+            event.target.style.color = 'white';
+            
+            showToast(`Showing ${period} arrivals`, 'info');
+        }
+
+        // Sort new arrivals
+        function sortNewArrivals(sortBy) {
+            showToast(`Sorting by: ${sortBy}`, 'info');
+        }
+
+        // Set view (grid/list)
+        function setView(view) {
+            currentView = view;
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+            
+            if (view === 'grid') {
+                gridBtn.style.background = '#3498db';
+                gridBtn.style.color = 'white';
+                listBtn.style.background = 'white';
+                listBtn.style.color = '#666';
+            } else {
+                listBtn.style.background = '#3498db';
+                listBtn.style.color = 'white';
+                gridBtn.style.background = 'white';
+                gridBtn.style.color = '#666';
+            }
+            
+            showToast(`Switched to ${view} view`, 'info');
+        }
+
+        // Get product by ID (mock function)
+        function getProductById(id) {
+            const products = {
+                1: { id: 1, name: "iPhone 15 Pro Max", price: 1199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" },
+                101: { id: 101, name: "WH-1000XM5 Headphones", price: 399.99, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" },
+                102: { id: 102, name: "Watch Series 9", price: 429.99, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" },
+                103: { id: 103, name: "Air Max Pulse", price: 179.99, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" },
+                104: { id: 104, name: "Sauvage Elixir", price: 159.99, image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" },
+                105: { id: 105, name: "MacBook Air", price: 1299, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
+                106: { id: 106, name: "Gold Edition Watch", price: 2499, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400" },
+                107: { id: 107, name: "Air Jordan 1 Retro", price: 1899, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400" },
+                108: { id: 108, name: "Leica M11 Edition", price: 8999, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400" },
+                109: { id: 109, name: "Creed Aventus Gold", price: 599, image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" }
+            };
+            return products[id];
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const quickViewModal = document.getElementById('quickViewModal');
+            const notifyModal = document.getElementById('notifyModal');
+            
+            if (event.target === quickViewModal) {
+                quickViewModal.style.display = 'none';
+            }
+            if (event.target === notifyModal) {
+                notifyModal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; min-height: 100vh;">
+
+    <!-- Header -->
+    <div style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between;">
+            <div onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <h1 style="margin: 0; font-size: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    APSE <span style="font-weight: 300;">Account</span>
+                </h1>
+            </div>
+            
+            <div style="display: flex; gap: 30px; align-items: center;">
+                <a href="index.html" style="color: #333; text-decoration: none; font-weight: 500;">Home</a>
+                <a href="shop.html" style="color: #333; text-decoration: none; font-weight: 500;">Shop</a>
+                <a href="orders.html" style="color: #333; text-decoration: none; font-weight: 500;">Orders</a>
+            </div>
+            
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="cart.html" style="position: relative; color: #333;">
+                    <i class="fas fa-shopping-cart" style="font-size: 22px;"></i>
+                    <span id="cartCount" style="position: absolute; top: -8px; right: -8px; background: #ff6b6b; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+                <button onclick="logout()" style="padding: 8px 20px; background: #ff6b6b; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 500;">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div style="max-width: 1400px; margin: 40px auto; padding: 0 30px;">
+        
+        <!-- Welcome Banner -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 40px; margin-bottom: 30px; color: white; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -20px; right: -20px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <div style="position: absolute; bottom: -20px; left: -20px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            
+            <div style="display: flex; align-items: center; gap: 30px; position: relative;">
+                <img id="userAvatar" src="" alt="Profile" style="width: 100px; height: 100px; border-radius: 50%; border: 4px solid white;">
+                <div>
+                    <h1 id="welcomeMessage" style="font-size: 36px; margin: 0 0 10px 0;">Welcome back!</h1>
+                    <p id="userEmail" style="font-size: 18px; opacity: 0.9; margin: 0;">Member since <span id="joinDate"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+            
+            <!-- Left Column -->
+            <div>
+                <!-- Account Overview -->
+                <div style="background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h2 style="margin: 0 0 20px 0; font-size: 24px;">Account Overview</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                        <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                            <i class="fas fa-box" style="font-size: 32px; color: #667eea;"></i>
+                            <h3 style="margin: 10px 0 5px 0; font-size: 28px;" id="orderCount">0</h3>
+                            <p style="color: #666;">Total Orders</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                            <i class="fas fa-heart" style="font-size: 32px; color: #ff6b6b;"></i>
+                            <h3 style="margin: 10px 0 5px 0; font-size: 28px;" id="wishlistCount">0</h3>
+                            <p style="color: #666;">Wishlist Items</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                            <i class="fas fa-tag" style="font-size: 32px; color: #f39c12;"></i>
+                            <h3 style="margin: 10px 0 5px 0; font-size: 28px;" id="pointsEarned">0</h3>
+                            <p style="color: #666;">Loyalty Points</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div style="background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; font-size: 24px;">Recent Orders</h2>
+                        <a href="orders.html" style="color: #667eea; text-decoration: none;">View All →</a>
+                    </div>
+                    
+                    <div id="recentOrders">
+                        <!-- Orders will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Wishlist Preview -->
+                <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; font-size: 24px;">Wishlist</h2>
+                        <a href="wishlist.html" style="color: #667eea; text-decoration: none;">View All →</a>
+                    </div>
+                    
+                    <div id="wishlistPreview" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                        <!-- Wishlist items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Profile Information -->
+                <div style="background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h2 style="margin: 0 0 20px 0; font-size: 24px;">Profile Information</h2>
+                    
+                    <div id="profileInfo">
+                        <!-- Profile info will be loaded here -->
+                    </div>
+                    
+                    <button onclick="editProfile()" style="width: 100%; padding: 15px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px;">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+
+                <!-- Default Address -->
+                <div style="background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; font-size: 24px;">Default Address</h2>
+                        <button onclick="addAddress()" style="background: none; border: none; color: #667eea; cursor: pointer;">+ Add</button>
+                    </div>
+                    
+                    <div id="defaultAddress">
+                        <!-- Address will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; font-size: 24px;">Payment Methods</h2>
+                        <button onclick="addPayment()" style="background: none; border: none; color: #667eea; cursor: pointer;">+ Add</button>
+                    </div>
+                    
+                    <div id="paymentMethods">
+                        <!-- Payment methods will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; padding: 40px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto;">
+            <h2 style="margin: 0 0 20px 0;">Edit Profile</h2>
+            
+            <form onsubmit="updateProfile(event)">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">First Name</label>
+                    <input type="text" id="editFirstName" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Last Name</label>
+                    <input type="text" id="editLastName" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Email</label>
+                    <input type="email" id="editEmail" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Phone</label>
+                    <input type="tel" id="editPhone" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 25px;">
+                    <button type="submit" style="flex: 1; padding: 15px; background: #667eea; color: white; border: none; border-radius: 10px; cursor: pointer;">Save Changes</button>
+                    <button type="button" onclick="closeEditModal()" style="flex: 1; padding: 15px; background: #f0f0f0; border: none; border-radius: 10px; cursor: pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <script>
+        let currentUser = null;
+
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for logged in user
+            const session = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            
+            if (!session) {
+                // Redirect to login if not authenticated
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            currentUser = JSON.parse(session).user;
+            loadUserData();
+            updateCartCount();
+        });
+
+        // Load user data
+        function loadUserData() {
+            // Update welcome message
+            document.getElementById('welcomeMessage').textContent = `Welcome back, ${currentUser.firstName}!`;
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userAvatar').src = currentUser.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg';
+            document.getElementById('joinDate').textContent = new Date(currentUser.joinDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+            
+            // Update stats
+            document.getElementById('orderCount').textContent = currentUser.orders?.length || 0;
+            document.getElementById('wishlistCount').textContent = currentUser.wishlist?.length || 0;
+            document.getElementById('pointsEarned').textContent = Math.floor((currentUser.orders?.length || 0) * 100) || 0;
+            
+            // Load recent orders
+            loadRecentOrders();
+            
+            // Load wishlist preview
+            loadWishlistPreview();
+            
+            // Load profile info
+            loadProfileInfo();
+            
+            // Load address
+            loadDefaultAddress();
+            
+            // Load payment methods
+            loadPaymentMethods();
+        }
+
+        // Load recent orders
+        function loadRecentOrders() {
+            const orders = currentUser.orders || [];
+            const container = document.getElementById('recentOrders');
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <i class="fas fa-box-open" style="font-size: 48px; color: #e0e0e0;"></i>
+                        <p style="color: #666; margin-top: 15px;">No orders yet</p>
+                        <a href="shop.html" style="color: #667eea;">Start Shopping →</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Show last 3 orders
+            const recentOrders = orders.slice(-3).reverse();
+            container.innerHTML = recentOrders.map(order => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0;">
+                    <div>
+                        <div style="font-weight: 600;">${order.id}</div>
+                        <div style="color: #666; font-size: 12px;">${new Date(order.date).toLocaleDateString()}</div>
+                    </div>
+                    <div>
+                        <span style="font-weight: 600;">$${order.total}</span>
+                        <span style="color: #27ae60; margin-left: 15px; font-size: 12px;">${order.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load wishlist preview
+        function loadWishlistPreview() {
+            const wishlist = currentUser.wishlist || [];
+            const container = document.getElementById('wishlistPreview');
+            
+            if (wishlist.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: span 3; text-align: center; padding: 30px;">
+                        <i class="fas fa-heart" style="font-size: 32px; color: #e0e0e0;"></i>
+                        <p style="color: #666;">Wishlist empty</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Show first 3 wishlist items (in real app, fetch product details)
+            container.innerHTML = wishlist.slice(0, 3).map(item => `
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 10px; margin: 0 auto;"></div>
+                    <p style="font-size: 12px; margin-top: 5px;">Product ${item}</p>
+                </div>
+            `).join('');
+        }
+
+        // Load profile info
+        function loadProfileInfo() {
+            const container = document.getElementById('profileInfo');
+            
+            container.innerHTML = `
+                <div style="margin-bottom: 15px;">
+                    <label style="color: #666; font-size: 12px;">Full Name</label>
+                    <p style="margin: 5px 0 0 0; font-weight: 600;">${currentUser.firstName} ${currentUser.lastName}</p>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="color: #666; font-size: 12px;">Email Address</label>
+                    <p style="margin: 5px 0 0 0;">${currentUser.email}</p>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="color: #666; font-size: 12px;">Phone Number</label>
+                    <p style="margin: 5px 0 0 0;">${currentUser.phone || 'Not provided'}</p>
+                </div>
+                <div>
+                    <label style="color: #666; font-size: 12px;">Member Since</label>
+                    <p style="margin: 5px 0 0 0;">${new Date(currentUser.joinDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
+            `;
+        }
+
+        // Load default address
+        function loadDefaultAddress() {
+            const addresses = currentUser.addresses || [];
+            const defaultAddr = addresses.find(a => a.isDefault) || addresses[0];
+            const container = document.getElementById('defaultAddress');
+            
+            if (!defaultAddr) {
+                container.innerHTML = `
+                    <p style="color: #666; text-align: center; padding: 20px;">No address saved</p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = `
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="font-weight: 600;">${defaultAddr.type?.toUpperCase() || 'HOME'}</span>
+                        ${defaultAddr.isDefault ? '<span style="background: #27ae60; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">Default</span>' : ''}
+                    </div>
+                    <p style="margin: 5px 0; color: #666;">${defaultAddr.street}</p>
+                    <p style="margin: 5px 0; color: #666;">${defaultAddr.city}, ${defaultAddr.state} ${defaultAddr.zip}</p>
+                </div>
+            `;
+        }
+
+        // Load payment methods
+        function loadPaymentMethods() {
+            const payments = currentUser.paymentMethods || [];
+            const container = document.getElementById('paymentMethods');
+            
+            if (payments.length === 0) {
+                container.innerHTML = `
+                    <p style="color: #666; text-align: center; padding: 20px;">No payment methods</p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = payments.map(p => `
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fab fa-cc-${p.type}" style="font-size: 24px;"></i>
+                        <div>
+                            <div style="font-weight: 600;">•••• •••• •••• ${p.last4}</div>
+                            <div style="font-size: 12px; color: #666;">Expires ${p.expiry}</div>
+                        </div>
+                    </div>
+                    ${p.isDefault ? '<span style="background: #27ae60; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">Default</span>' : ''}
+                </div>
+            `).join('');
+        }
+
+        // Edit profile
+        function editProfile() {
+            document.getElementById('editFirstName').value = currentUser.firstName || '';
+            document.getElementById('editLastName').value = currentUser.lastName || '';
+            document.getElementById('editEmail').value = currentUser.email || '';
+            document.getElementById('editPhone').value = currentUser.phone || '';
+            
+            document.getElementById('editProfileModal').style.display = 'flex';
+        }
+
+        // Update profile
+        function updateProfile(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('editFirstName').value;
+            const lastName = document.getElementById('editLastName').value;
+            const email = document.getElementById('editEmail').value;
+            const phone = document.getElementById('editPhone').value;
+            
+            // Update user in localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                users[userIndex] = {
+                    ...users[userIndex],
+                    firstName,
+                    lastName,
+                    email,
+                    phone
+                };
+                
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Update session
+                const session = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+                session.user = users[userIndex];
+                
+                if (localStorage.getItem('currentUser')) {
+                    localStorage.setItem('currentUser', JSON.stringify(session));
+                } else {
+                    sessionStorage.setItem('currentUser', JSON.stringify(session));
+                }
+                
+                currentUser = users[userIndex];
+                loadUserData();
+                closeEditModal();
+                showToast('Profile updated successfully!', 'success');
+            }
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editProfileModal').style.display = 'none';
+        }
+
+        // Add address (placeholder)
+        function addAddress() {
+            showToast('Address management coming soon!', 'info');
+        }
+
+        // Add payment (placeholder)
+        function addPayment() {
+            showToast('Payment method management coming soon!', 'info');
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            showToast('Logged out successfully', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        // Show toast
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editProfileModal');
+            if (event.target === modal) {
+                closeEditModal();
+            }
+        };
+    </script>
+
+    <style>
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadeOut {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</body>
+</html>

@@ -5,113 +5,1536 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop - APSE Shopping</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/animations.css">
 </head>
-<body>
-    <header class="header">
-        <!-- Same header as index.html -->
-    </header>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; min-height: 100vh;">
 
-    <!-- Page Banner -->
-    <section class="page-banner">
-        <div class="container">
-            <h1>Shop</h1>
-            <div class="breadcrumb">
-                <a href="index.html">Home</a> / <span>Shop</span>
+    <!-- Header -->
+    <div style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <!-- Logo -->
+            <div onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <h1 style="margin: 0; font-size: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    APSE <span style="font-weight: 300;">Shopping</span>
+                </h1>
+            </div>
+            
+            <!-- Search Bar -->
+            <div style="flex: 0 1 500px; position: relative;">
+                <input type="text" id="searchInput" placeholder="Search products..." style="width: 100%; padding: 12px 20px 12px 45px; border: 2px solid #e0e0e0; border-radius: 30px; font-size: 14px; outline: none; transition: all 0.3s; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+            </div>
+            
+            <!-- Navigation Icons -->
+            <div style="display: flex; gap: 25px; align-items: center;">
+                <a href="wishlist.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="far fa-heart" style="font-size: 22px;"></i>
+                    <span id="wishlistCount" style="position: absolute; top: -8px; right: -8px; background: #e74c3c; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="fas fa-shopping-cart" style="font-size: 22px;"></i>
+                    <span id="cartCount" style="position: absolute; top: -8px; right: -8px; background: #e74c3c; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+                <div style="width: 2px; height: 30px; background: #e0e0e0;"></div>
+                <a href="login.html" style="color: #333; text-decoration: none; font-weight: 500;">Login</a>
+                <a href="register.html" style="padding: 8px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Sign Up</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Shop Section -->
-    <section class="shop-section">
-        <div class="container">
-            <div class="shop-layout">
-                <!-- Sidebar Filters -->
-                <aside class="shop-sidebar">
-                    <div class="filter-widget">
-                        <h3>Categories</h3>
-                        <ul class="category-filter" id="categoryFilter">
-                            <!-- Categories will be loaded dynamically -->
-                        </ul>
-                    </div>
+    <!-- Page Banner -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0; text-align: center;">
+        <h1 style="margin: 0; color: white; font-size: 48px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Shop</h1>
+        <div style="margin-top: 15px; color: rgba(255,255,255,0.8); font-size: 16px;">
+            <a href="index.html" style="color: white; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Home</a>
+            <span style="margin: 0 10px;">/</span>
+            <span>Shop</span>
+        </div>
+        <p style="color: rgba(255,255,255,0.9); margin-top: 20px; font-size: 18px;">Discover amazing products at unbeatable prices</p>
+    </div>
 
-                    <div class="filter-widget">
-                        <h3>Price Range</h3>
-                        <div class="price-filter">
-                            <input type="range" id="priceRange" min="0" max="1000" step="10" value="500">
-                            <div class="price-values">
-                                <span>$0</span>
-                                <span>$<span id="priceValue">500</span></span>
-                            </div>
+    <!-- Main Shop Container -->
+    <div style="max-width: 1400px; margin: 40px auto; padding: 0 20px;">
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 30px;">
+            
+            <!-- ========== FILTER SIDEBAR ========== -->
+            <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px;">
+                
+                <!-- Filter Header -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0;">
+                    <h3 style="margin: 0; font-size: 20px; color: #333;">Filters</h3>
+                    <button onclick="clearAllFilters()" style="background: none; border: none; color: #667eea; font-size: 14px; cursor: pointer; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+                        Clear All
+                    </button>
+                </div>
+                
+                <!-- Search Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Search</label>
+                    <input type="text" id="filterSearch" placeholder="Search in results..." style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                </div>
+                
+                <!-- Category Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Category</label>
+                    <div style="max-height: 200px; overflow-y: auto; padding-right: 10px;">
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Electronics" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Electronics (245)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Fashion" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Fashion (512)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Home & Living" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Home & Living (187)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Sports" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Sports (123)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Books" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Books (300)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Toys" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Toys (98)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Beauty" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Beauty (154)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="category-filter" value="Automotive" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Automotive (87)
+                            </label>
                         </div>
                     </div>
-
-                    <div class="filter-widget">
-                        <h3>Brands</h3>
-                        <div class="brand-filter" id="brandFilter">
-                            <!-- Brands will be loaded dynamically -->
+                </div>
+                
+                <!-- Price Range Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 15px; font-weight: 600; color: #333;">Price Range</label>
+                    <div style="margin-bottom: 15px;">
+                        <input type="range" id="priceRange" min="0" max="1000" value="500" style="width: 100%; height: 5px; -webkit-appearance: none; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 5px; outline: none;" oninput="updatePriceLabel(this.value)">
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <span style="color: #666;">$0</span>
+                            <span style="color: #667eea; font-weight: 600;" id="priceLabel">$500</span>
+                            <span style="color: #666;">$1000+</span>
                         </div>
                     </div>
-
-                    <div class="filter-widget">
-                        <h3>Rating</h3>
-                        <div class="rating-filter" id="ratingFilter">
-                            <label><input type="checkbox" value="4"> 4★ & above</label>
-                            <label><input type="checkbox" value="3"> 3★ & above</label>
-                            <label><input type="checkbox" value="2"> 2★ & above</label>
-                            <label><input type="checkbox" value="1"> 1★ & above</label>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-size: 12px; color: #666;">Min</label>
+                            <input type="number" id="minPrice" placeholder="0" style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px; outline: none; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-size: 12px; color: #666;">Max</label>
+                            <input type="number" id="maxPrice" placeholder="1000" style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px; outline: none; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
                         </div>
                     </div>
-
-                    <button class="btn btn-primary apply-filters">Apply Filters</button>
-                    <button class="btn btn-outline clear-filters">Clear All</button>
-                </aside>
-
+                </div>
+                
+                <!-- Brand Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Brand</label>
+                    <div style="max-height: 150px; overflow-y: auto; padding-right: 10px;">
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="brand-filter" value="Sony" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Sony (45)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="brand-filter" value="Apple" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Apple (32)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="brand-filter" value="Nike" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Nike (78)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="brand-filter" value="Adidas" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Adidas (56)
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                                <input type="checkbox" class="brand-filter" value="Samsung" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                                Samsung (34)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rating Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Customer Rating</label>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="radio" name="rating" class="rating-filter" value="4" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            <span style="color: #f1c40f;">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </span>
+                            & Up (234)
+                        </label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="radio" name="rating" class="rating-filter" value="3" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            <span style="color: #f1c40f;">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+                            </span>
+                            & Up (456)
+                        </label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="radio" name="rating" class="rating-filter" value="2" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            <span style="color: #f1c40f;">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                            </span>
+                            & Up (678)
+                        </label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="radio" name="rating" class="rating-filter" value="1" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            <span style="color: #f1c40f;">
+                                <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                            </span>
+                            & Up (789)
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Availability Filter -->
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Availability</label>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="checkbox" id="inStock" class="availability-filter" value="inStock" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            In Stock (845)
+                        </label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="checkbox" id="freeShipping" class="availability-filter" value="freeShipping" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            Free Shipping (523)
+                        </label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: flex; align-items: center; color: #666; cursor: pointer;">
+                            <input type="checkbox" id="onSale" class="availability-filter" value="onSale" style="margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;">
+                            On Sale (234)
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Apply Filters Button -->
+                <button onclick="applyFilters()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-bottom: 10px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+                
+                <button onclick="resetFilters()" style="width: 100%; padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#667eea'; this.style.color='#667eea'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#666'">
+                    Reset Filters
+                </button>
+            </div>
+            
+            <!-- ========== PRODUCTS SECTION ========== -->
+            <div>
+                <!-- Shop Toolbar -->
+                <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    
+                    <!-- Results Count -->
+                    <div>
+                        <span style="font-weight: 600; color: #333;" id="resultsStart">1</span>
+                        <span style="color: #666;">-</span>
+                        <span style="font-weight: 600; color: #333;" id="resultsEnd">12</span>
+                        <span style="color: #666;">of</span>
+                        <span style="font-weight: 600; color: #667eea;" id="resultsTotal">48</span>
+                        <span style="color: #666;">results</span>
+                    </div>
+                    
+                    <!-- Sort Options -->
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <label style="color: #666;">Sort by:</label>
+                        <select id="sortBy" style="padding: 8px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; cursor: pointer;" onchange="sortProducts(this.value)">
+                            <option value="default">Default</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="name-desc">Name: Z to A</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">Newest Arrivals</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="discount">Biggest Discount</option>
+                        </select>
+                        
+                        <!-- View Toggle -->
+                        <div style="display: flex; gap: 5px; border: 2px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+                            <button onclick="setView('grid')" id="gridViewBtn" style="padding: 8px 12px; background: #667eea; color: white; border: none; cursor: pointer; transition: all 0.3s;">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button onclick="setView('list')" id="listViewBtn" style="padding: 8px 12px; background: white; color: #666; border: none; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Items Per Page -->
+                        <select id="itemsPerPage" style="padding: 8px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none;" onchange="changeItemsPerPage(this.value)">
+                            <option value="12">12 per page</option>
+                            <option value="24">24 per page</option>
+                            <option value="36">36 per page</option>
+                            <option value="48">48 per page</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Active Filters -->
+                <div id="activeFilters" style="display: none; background: white; border-radius: 10px; padding: 15px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <span style="color: #666;">Active Filters:</span>
+                        <div id="filterTags" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                    </div>
+                </div>
+                
                 <!-- Products Grid -->
-                <div class="shop-content">
-                    <div class="shop-toolbar">
-                        <div class="results-count">
-                            Showing <span id="startCount">1</span>-<span id="endCount">12</span> of <span id="totalCount">48</span> results
-                        </div>
-                        <div class="sort-options">
-                            <label for="sortBy">Sort by:</label>
-                            <select id="sortBy">
-                                <option value="default">Default</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="name-asc">Name: A to Z</option>
-                                <option value="name-desc">Name: Z to A</option>
-                                <option value="rating">Rating</option>
-                            </select>
-                        </div>
-                        <div class="view-options">
-                            <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
-                            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
-                        </div>
+                <div id="productsContainer" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 600px;">
+                    <div id="productsGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
+                        <!-- Products will be loaded here dynamically -->
                     </div>
-
-                    <div class="products-grid" id="productsGrid">
-                        <!-- Products will be loaded dynamically -->
+                    
+                    <!-- Loading Spinner -->
+                    <div id="loadingSpinner" style="display: none; text-align: center; padding: 50px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 40px; color: #667eea;"></i>
+                        <p style="margin-top: 15px; color: #666;">Loading products...</p>
                     </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination" id="pagination">
-                        <!-- Pagination will be generated dynamically -->
+                    
+                    <!-- No Results -->
+                    <div id="noResults" style="display: none; text-align: center; padding: 60px 20px;">
+                        <i class="fas fa-search" style="font-size: 60px; color: #e0e0e0; margin-bottom: 20px;"></i>
+                        <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">No Products Found</h3>
+                        <p style="color: #666; margin-bottom: 25px;">Try adjusting your filters or search criteria.</p>
+                        <button onclick="resetFilters()" style="padding: 12px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">Clear Filters</button>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div id="pagination" style="display: flex; justify-content: center; align-items: center; margin-top: 30px; gap: 10px;">
+                    <!-- Pagination will be generated dynamically -->
+                </div>
+                
+                <!-- Recently Viewed -->
+                <div style="margin-top: 40px; background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px; color: #333; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-clock" style="color: #667eea;"></i>
+                        Recently Viewed
+                    </h3>
+                    <div id="recentlyViewed" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px;">
+                        <!-- Recently viewed products will be loaded here -->
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-        <!-- Same footer as index.html -->
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalSlide 0.3s ease;">
+            <button onclick="closeQuickView()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; font-size: 24px; cursor: pointer; color: #666; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="quickViewContent" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 40px;">
+                <!-- Quick view content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div id="compareModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 1200px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalSlide 0.3s ease;">
+            <button onclick="closeCompareModal()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; font-size: 24px; cursor: pointer; color: #666; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="compareContent" style="padding: 40px;">
+                <!-- Compare content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; padding: 60px 0 20px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">About APSE</h3>
+                    <p style="color: #bdc3c7; line-height: 1.8;">Your premier online shopping destination for quality products at unbeatable prices. Shop with confidence with our 30-day return policy.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="about.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">About Us</a></li>
+                        <li style="margin-bottom: 12px;"><a href="contact.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Contact Us</a></li>
+                        <li style="margin-bottom: 12px;"><a href="faq.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">FAQ</a></li>
+                        <li style="margin-bottom: 12px;"><a href="blog.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Customer Service</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="shipping.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Shipping Policy</a></li>
+                        <li style="margin-bottom: 12px;"><a href="returns.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Returns & Exchanges</a></li>
+                        <li style="margin-bottom: 12px;"><a href="privacy.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Privacy Policy</a></li>
+                        <li style="margin-bottom: 12px;"><a href="terms.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Newsletter</h3>
+                    <p style="color: #bdc3c7; margin-bottom: 20px;">Subscribe to get updates on new products and exclusive offers.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email" style="flex: 1; padding: 10px; border: none; border-radius: 5px; outline: none;">
+                        <button style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;" onmouseover="this.style.background='#5a67d8'" onmouseout="this.style.background='#667eea'">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #34495e;">
+                <p style="color: #bdc3c7; margin: 0;">&copy; 2026 APSE Shopping. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/utils.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/shop.js"></script>
+    <!-- Styles -->
+    <style>
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+                @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .product-card {
+            animation: fadeIn 0.5s ease;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-card.list-view {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .product-badge.sale {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .product-badge.new {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .product-badge.featured {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .product-badge.bestseller {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .product-wishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-wishlist:hover {
+            transform: scale(1.1);
+            color: #e74c3c;
+        }
+        
+        .product-wishlist.active {
+            color: #e74c3c;
+        }
+        
+        .product-wishlist.active i {
+            font-weight: 900;
+        }
+        
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .product-image-container img {
+            transition: transform 0.5s;
+        }
+        
+        .product-image-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(5px);
+            transition: bottom 0.3s;
+        }
+        
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+        
+        .product-action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-action-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .discount-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+        
+        .stock-status {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .in-stock {
+            color: #27ae60;
+        }
+        
+        .low-stock {
+            color: #f39c12;
+        }
+        
+        .out-of-stock {
+            color: #e74c3c;
+        }
+        
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .pagination-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .filter-tag {
+            padding: 5px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #333;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-tag button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .filter-tag button:hover {
+            color: #e74c3c;
+        }
+        
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @media (max-width: 1024px) {
+            #productsGrid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            #recentlyViewed {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            div[style*="grid-template-columns: 280px 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #productsGrid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #recentlyViewed {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .product-card.list-view {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .quick-view-content {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== PRODUCT DATABASE ==========
+        const products = [
+            // Electronics Category (50 products)
+            { id: 1, name: "Sony WH-1000XM4 Wireless Headphones", category: "Electronics", brand: "Sony", price: 349.99, originalPrice: 399.99, rating: 4.8, reviews: 1250, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400", stock: 45, isNew: false, isBestseller: true, discount: 12, freeShipping: true },
+            { id: 2, name: "Apple AirPods Pro (2nd Generation)", category: "Electronics", brand: "Apple", price: 249.99, originalPrice: 279.99, rating: 4.9, reviews: 3200, image: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=400", stock: 78, isNew: true, isBestseller: true, discount: 10, freeShipping: true },
+            { id: 3, name: "Samsung 49\" Odyssey G9 Gaming Monitor", category: "Electronics", brand: "Samsung", price: 1299.99, originalPrice: 1499.99, rating: 4.7, reviews: 567, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400", stock: 23, isNew: true, isBestseller: false, discount: 13, freeShipping: true },
+            { id: 4, name: "MacBook Pro 16\" M2 Max", category: "Electronics", brand: "Apple", price: 2499.99, originalPrice: 2799.99, rating: 4.9, reviews: 890, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400", stock: 34, isNew: true, isBestseller: true, discount: 10, freeShipping: true },
+            { id: 5, name: "iPad Pro 12.9\" (6th Generation)", category: "Electronics", brand: "Apple", price: 1099.99, originalPrice: 1199.99, rating: 4.8, reviews: 2100, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400", stock: 56, isNew: false, isBestseller: true, discount: 8, freeShipping: true },
+            { id: 6, name: "Sony A7 IV Mirrorless Camera", category: "Electronics", brand: "Sony", price: 2499.99, originalPrice: 2699.99, rating: 4.8, reviews: 345, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400", stock: 12, isNew: true, isBestseller: false, discount: 7, freeShipping: true },
+            { id: 7, name: "DJI Mavic 3 Pro Drone", category: "Electronics", brand: "DJI", price: 1999.99, originalPrice: 2199.99, rating: 4.7, reviews: 234, image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400", stock: 8, isNew: true, isBestseller: false, discount: 9, freeShipping: true },
+            { id: 8, name: "Xbox Series X Console", category: "Electronics", brand: "Microsoft", price: 499.99, originalPrice: 499.99, rating: 4.9, reviews: 4500, image: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400", stock: 0, isNew: false, isBestseller: true, discount: 0, freeShipping: true },
+            { id: 9, name: "PlayStation 5 Console", category: "Electronics", brand: "Sony", price: 499.99, originalPrice: 499.99, rating: 4.9, reviews: 5200, image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400", stock: 0, isNew: false, isBestseller: true, discount: 0, freeShipping: true },
+            { id: 10, name: "Nintendo Switch OLED", category: "Electronics", brand: "Nintendo", price: 349.99, originalPrice: 349.99, rating: 4.8, reviews: 3800, image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=400", stock: 45, isNew: true, isBestseller: true, discount: 0, freeShipping: true },
+            
+            // Fashion Category (50 products)
+            { id: 11, name: "Nike Air Max 270", category: "Fashion", brand: "Nike", price: 149.99, originalPrice: 169.99, rating: 4.7, reviews: 2800, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", stock: 120, isNew: true, isBestseller: true, discount: 12, freeShipping: true },
+            { id: 12, name: "Adidas Ultraboost 22", category: "Fashion", brand: "Adidas", price: 179.99, originalPrice: 199.99, rating: 4.6, reviews: 1500, image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400", stock: 85, isNew: false, isBestseller: true, discount: 10, freeShipping: true },
+            { id: 13, name: "Levi's 501 Original Jeans", category: "Fashion", brand: "Levi's", price: 79.99, originalPrice: 89.99, rating: 4.5, reviews: 3200, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", stock: 200, isNew: false, isBestseller: true, discount: 11, freeShipping: false },
+            { id: 14, name: "The North Face Nuptse Jacket", category: "Fashion", brand: "The North Face", price: 229.99, originalPrice: 259.99, rating: 4.8, reviews: 890, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400", stock: 34, isNew: true, isBestseller: false, discount: 11, freeShipping: true },
+            { id: 15, name: "Ray-Ban Aviator Sunglasses", category: "Fashion", brand: "Ray-Ban", price: 159.99, originalPrice: 179.99, rating: 4.7, reviews: 2100, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400", stock: 67, isNew: false, isBestseller: true, discount: 11, freeShipping: false },
+            { id: 16, name: "Gucci GG Marmont Bag", category: "Fashion", brand: "Gucci", price: 1890.99, originalPrice: 1990.99, rating: 4.9, reviews: 234, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400", stock: 5, isNew: true, isBestseller: false, discount: 5, freeShipping: true },
+            
+            // Home & Living Category (50 products)
+            { id: 17, name: "IKEA KALLAX Shelf Unit", category: "Home & Living", brand: "IKEA", price: 89.99, originalPrice: 99.99, rating: 4.6, reviews: 1800, image: "https://images.unsplash.com/photo-1597072689227-8882273e8f6a?w=400", stock: 45, isNew: false, isBestseller: true, discount: 10, freeShipping: true },
+            { id: 18, name: "Casper Sleep Element Mattress", category: "Home & Living", brand: "Casper", price: 495.99, originalPrice: 595.99, rating: 4.8, reviews: 2300, image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400", stock: 23, isNew: true, isBestseller: true, discount: 16, freeShipping: true },
+            { id: 19, name: "Dyson V15 Detect Vacuum", category: "Home & Living", brand: "Dyson", price: 699.99, originalPrice: 749.99, rating: 4.8, reviews: 890, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400", stock: 12, isNew: true, isBestseller: false, discount: 6, freeShipping: true },
+            { id: 20, name: "KitchenAid Stand Mixer", category: "Home & Living", brand: "KitchenAid", price: 429.99, originalPrice: 479.99, rating: 4.9, reviews: 3400, image: "https://images.unsplash.com/photo-1594225855655-ff5e1e6e9976?w=400", stock: 34, isNew: false, isBestseller: true, discount: 10, freeShipping: true },
+            
+            // Sports Category (50 products)
+            { id: 21, name: "Wilson Evolution Basketball", category: "Sports", brand: "Wilson", price: 59.99, originalPrice: 69.99, rating: 4.7, reviews: 1200, image: "https://images.unsplash.com/photo-1519861531473-9200262188bf?w=400", stock: 150, isNew: false, isBestseller: true, discount: 14, freeShipping: false },
+            { id: 22, name: "Babolat Pure Aero Tennis Racquet", category: "Sports", brand: "Babolat", price: 229.99, originalPrice: 259.99, rating: 4.8, reviews: 567, image: "https://images.unsplash.com/photo-1617083272422-72b453b6f5d5?w=400", stock: 23, isNew: true, isBestseller: false, discount: 11, freeShipping: true },
+            { id: 23, name: "Callaway Rogue ST Golf Driver", category: "Sports", brand: "Callaway", price: 549.99, originalPrice: 599.99, rating: 4.8, reviews: 345, image: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400", stock: 8, isNew: true, isBestseller: false, discount: 8, freeShipping: true },
+            
+            // Beauty Category (50 products)
+            { id: 24, name: "Dyson Airwrap Styler", category: "Beauty", brand: "Dyson", price: 549.99, originalPrice: 599.99, rating: 4.7, reviews: 2300, image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=400", stock: 15, isNew: true, isBestseller: true, discount: 8, freeShipping: true },
+            { id: 25, name: "Charlotte Tilbury Pillow Talk Set", category: "Beauty", brand: "Charlotte Tilbury", price: 129.99, originalPrice: 159.99, rating: 4.9, reviews: 890, image: "https://images.unsplash.com/photo-1631730359585-38a4935cbec4?w=400", stock: 45, isNew: true, isBestseller: true, discount: 18, freeShipping: false },
+            
+            // Books Category
+            { id: 26, name: "Atomic Habits by James Clear", category: "Books", brand: "Penguin", price: 24.99, originalPrice: 29.99, rating: 4.9, reviews: 5200, image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400", stock: 300, isNew: false, isBestseller: true, discount: 16, freeShipping: false },
+            { id: 27, name: "The Psychology of Money", category: "Books", brand: "Harriman House", price: 21.99, originalPrice: 24.99, rating: 4.8, reviews: 3400, image: "https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?w=400", stock: 250, isNew: true, isBestseller: true, discount: 12, freeShipping: false },
+            
+            // Automotive Category
+            { id: 28, name: "Michelin Pilot Sport 4S Tires", category: "Automotive", brand: "Michelin", price: 899.99, originalPrice: 999.99, rating: 4.8, reviews: 450, image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400", stock: 16, isNew: false, isBestseller: true, discount: 10, freeShipping: true },
+            { id: 29, name: "Bose QuietComfort Car Kit", category: "Automotive", brand: "Bose", price: 149.99, originalPrice: 179.99, rating: 4.6, reviews: 234, image: "https://images.unsplash.com/photo-1609584861778-59ced6a59c88?w=400", stock: 34, isNew: true, isBestseller: false, discount: 16, freeShipping: true },
+            
+            // Toys Category
+            { id: 30, name: "LEGO Star Wars Millennium Falcon", category: "Toys", brand: "LEGO", price: 159.99, originalPrice: 169.99, rating: 4.9, reviews: 1800, image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400", stock: 45, isNew: true, isBestseller: true, discount: 5, freeShipping: true },
+            { id: 31, name: "Hot Wheels Track Set", category: "Toys", brand: "Mattel", price: 49.99, originalPrice: 59.99, rating: 4.7, reviews: 890, image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=400", stock: 120, isNew: false, isBestseller: true, discount: 16, freeShipping: false }
+        ];
+
+        // State variables
+        let currentProducts = [...products];
+        let filteredProducts = [...products];
+        let currentPage = 1;
+        let itemsPerPage = 12;
+        let currentView = 'grid';
+        let compareList = [];
+        let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            updateCounts();
+            loadRecentlyViewed();
+            initFilters();
+        });
+
+        // Load products
+        function loadProducts() {
+            const container = document.getElementById('productsGrid');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedProducts = filteredProducts.slice(start, end);
+            
+            if (paginatedProducts.length === 0) {
+                document.getElementById('noResults').style.display = 'block';
+                container.style.display = 'none';
+            } else {
+                document.getElementById('noResults').style.display = 'none';
+                container.style.display = 'grid';
+                container.innerHTML = paginatedProducts.map(product => createProductCard(product)).join('');
+            }
+            
+            updatePagination();
+            updateResultsCount();
+        }
+
+        // Create product card HTML
+        function createProductCard(product) {
+            const discount = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+            const isInWishlist = JSON.parse(localStorage.getItem('wishlist') || '[]').includes(product.id);
+            const stockStatus = product.stock > 10 ? 'in-stock' : product.stock > 0 ? 'low-stock' : 'out-of-stock';
+            const stockText = product.stock > 10 ? 'In Stock' : product.stock > 0 ? `Only ${product.stock} left!` : 'Out of Stock';
+            
+            return `
+                <div class="product-card ${currentView === 'list' ? 'list-view' : ''}" data-product-id="${product.id}">
+                    ${product.discount > 0 ? `<span class="product-badge sale">-${product.discount}%</span>` : ''}
+                    ${product.isNew ? '<span class="product-badge new">New</span>' : ''}
+                    ${product.isBestseller ? '<span class="product-badge bestseller">Bestseller</span>' : ''}
+                    
+                    <div class="product-wishlist ${isInWishlist ? 'active' : ''}" onclick="toggleWishlist(${product.id}, event)">
+                        <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+                    </div>
+                    
+                    <div class="product-image-container" onclick="viewProduct(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" style="width: 100%; height: ${currentView === 'list' ? '200px' : '250px'}; object-fit: cover;">
+                        
+                        <div class="product-actions">
+                            <button class="product-action-btn" onclick="quickView(${product.id}, event)" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="product-action-btn" onclick="addToCompare(${product.id}, event)" title="Add to Compare">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                            <button class="product-action-btn" onclick="shareProduct(${product.id}, event)" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px;">
+                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">${product.brand}</div>
+                        <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #333; cursor: pointer;" onclick="viewProduct(${product.id})">${product.name}</h3>
+                        
+                        <div class="product-rating">
+                            ${generateStars(product.rating)}
+                            <span style="color: #999; margin-left: 5px;">(${product.reviews})</span>
+                        </div>
+                        
+                        <div class="product-price">
+                            <span class="current-price">$${product.price.toFixed(2)}</span>
+                            ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                            ${product.discount > 0 ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
+                        </div>
+                        
+                        <div class="stock-status ${stockStatus}">
+                            <i class="fas ${product.stock > 0 ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            ${stockText}
+                        </div>
+                        
+                        ${currentView === 'list' ? `
+                            <p style="color: #666; margin: 10px 0; line-height: 1.6;">Experience premium quality with this ${product.name}. Perfect for everyday use.</p>
+                        ` : ''}
+                        
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id}, event)" ${product.stock === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart"></i>
+                            ${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                        </button>
+                        
+                        ${product.freeShipping ? `
+                            <div style="margin-top: 10px; font-size: 12px; color: #27ae60;">
+                                <i class="fas fa-truck"></i> Free Shipping
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate star rating HTML
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Toggle wishlist
+        function toggleWishlist(productId, event) {
+            event.stopPropagation();
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                showToast('Removed from wishlist', 'info');
+            } else {
+                wishlist.push(productId);
+                showToast('Added to wishlist!', 'success');
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+            loadProducts(); // Refresh to update wishlist icons
+        }
+
+        // Add to cart
+        function addToCart(productId, event) {
+            event.stopPropagation();
+            const product = products.find(p => p.id === productId);
+            
+            if (product.stock === 0) {
+                showToast('Product is out of stock', 'error');
+                return;
+            }
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                if (existingItem.quantity >= product.stock) {
+                    showToast('Maximum stock reached', 'error');
+                    return;
+                }
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: productId, quantity: 1 });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showToast(`${product.name} added to cart!`, 'success');
+            
+            // Add to recently viewed
+            addToRecentlyViewed(productId);
+        }
+
+        // Quick view
+        function quickView(productId, event) {
+            event.stopPropagation();
+            const product = products.find(p => p.id === productId);
+            
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+            
+            content.innerHTML = `
+                <div style="position: relative;">
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: auto; border-radius: 10px;">
+                </div>
+                <div>
+                    <div style="font-size: 14px; color: #999; margin-bottom: 10px;">${product.brand}</div>
+                    <h2 style="margin: 0 0 15px 0; font-size: 24px;">${product.name}</h2>
+                    
+                    <div class="product-rating" style="margin-bottom: 15px;">
+                        ${generateStars(product.rating)}
+                        <span style="color: #999; margin-left: 10px;">${product.reviews} reviews</span>
+                    </div>
+                    
+                    <div class="product-price" style="margin-bottom: 15px;">
+                        <span class="current-price" style="font-size: 28px;">$${product.price.toFixed(2)}</span>
+                        ${product.originalPrice ? `<span class="original-price" style="font-size: 18px;">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                    </div>
+                    
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">Experience premium quality with this ${product.name}. Perfect for everyday use. Features include premium build quality, excellent performance, and long-lasting durability.</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #27ae60;"></i> In Stock: ${product.stock} units</div>
+                        ${product.freeShipping ? '<div style="margin-bottom: 10px;"><i class="fas fa-truck" style="color: #27ae60;"></i> Free Shipping</div>' : ''}
+                        <div><i class="fas fa-undo-alt" style="color: #27ae60;"></i> 30-Day Returns</div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button onclick="updateQuickViewQuantity(-1)" style="width: 40px; height: 40px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer;">-</button>
+                            <span id="quickViewQuantity" style="font-weight: 600; min-width: 30px; text-align: center;">1</span>
+                            <button onclick="updateQuickViewQuantity(1)" style="width: 40px; height: 40px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer;">+</button>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <button onclick="addToCartFromQuickView(${product.id})" style="flex: 1; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                            Add to Cart
+                        </button>
+                        <button onclick="buyNow(${product.id})" style="flex: 1; padding: 15px; background: white; border: 2px solid #667eea; color: #667eea; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+            addToRecentlyViewed(productId);
+        }
+
+        // Update quick view quantity
+        let quickViewQty = 1;
+        function updateQuickViewQuantity(change) {
+            const qtyElement = document.getElementById('quickViewQuantity');
+            let newQty = quickViewQty + change;
+            if (newQty >= 1 && newQty <= 10) {
+                quickViewQty = newQty;
+                qtyElement.textContent = quickViewQty;
+            }
+        }
+
+        // Add to cart from quick view
+        function addToCartFromQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            for (let i = 0; i < quickViewQty; i++) {
+                addToCart(productId, event);
+            }
+            
+            closeQuickView();
+            showToast(`${quickViewQty}x ${product.name} added to cart!`, 'success');
+        }
+
+        // Buy now
+        function buyNow(productId) {
+            addToCart(productId, event);
+            window.location.href = 'checkout.html';
+        }
+
+        // Close quick view
+        function closeQuickView() {
+            document.getElementById('quickViewModal').style.display = 'none';
+            quickViewQty = 1;
+        }
+
+        // Add to compare
+        function addToCompare(productId, event) {
+            event.stopPropagation();
+            
+            if (compareList.length >= 4) {
+                showToast('You can compare up to 4 products', 'error');
+                return;
+            }
+            
+            if (compareList.includes(productId)) {
+                showToast('Product already in comparison', 'info');
+                return;
+            }
+            
+            compareList.push(productId);
+            showToast('Product added to compare', 'success');
+            
+            if (compareList.length >= 2) {
+                document.getElementById('compareBtn').style.display = 'flex';
+            }
+        }
+
+        // Compare products
+        function compareProducts() {
+            if (compareList.length < 2) {
+                showToast('Select at least 2 products to compare', 'error');
+                return;
+            }
+            
+            const compareProducts = products.filter(p => compareList.includes(p.id));
+            const modal = document.getElementById('compareModal');
+            const content = document.getElementById('compareContent');
+            
+            let tableHTML = '<h2 style="margin-bottom: 30px;">Product Comparison</h2>';
+            tableHTML += '<table style="width: 100%; border-collapse: collapse;">';
+            
+            // Headers
+            tableHTML += '<tr style="background: #f8f9fa;">';
+            tableHTML += '<th style="padding: 15px; text-align: left;">Features</th>';
+            compareProducts.forEach(p => {
+                tableHTML += `<th style="padding: 15px; text-align: center;">${p.name}</th>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Price row
+            tableHTML += '<tr style="border-bottom: 1px solid #e0e0e0;">';
+            tableHTML += '<td style="padding: 15px; font-weight: 600;">Price</td>';
+            compareProducts.forEach(p => {
+                tableHTML += `<td style="padding: 15px; text-align: center;">$${p.price.toFixed(2)}</td>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Rating row
+            tableHTML += '<tr style="border-bottom: 1px solid #e0e0e0;">';
+            tableHTML += '<td style="padding: 15px; font-weight: 600;">Rating</td>';
+            compareProducts.forEach(p => {
+                tableHTML += `<td style="padding: 15px; text-align: center;">${p.rating} ★ (${p.reviews})</td>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Brand row
+            tableHTML += '<tr style="border-bottom: 1px solid #e0e0e0;">';
+            tableHTML += '<td style="padding: 15px; font-weight: 600;">Brand</td>';
+            compareProducts.forEach(p => {
+                tableHTML += `<td style="padding: 15px; text-align: center;">${p.brand}</td>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Stock row
+            tableHTML += '<tr style="border-bottom: 1px solid #e0e0e0;">';
+            tableHTML += '<td style="padding: 15px; font-weight: 600;">Availability</td>';
+            compareProducts.forEach(p => {
+                const status = p.stock > 0 ? 'In Stock' : 'Out of Stock';
+                const color = p.stock > 0 ? '#27ae60' : '#e74c3c';
+                tableHTML += `<td style="padding: 15px; text-align: center; color: ${color};">${status}</td>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Free shipping row
+            tableHTML += '<tr style="border-bottom: 1px solid #e0e0e0;">';
+            tableHTML += '<td style="padding: 15px; font-weight: 600;">Free Shipping</td>';
+            compareProducts.forEach(p => {
+                const value = p.freeShipping ? 'Yes' : 'No';
+                const color = p.freeShipping ? '#27ae60' : '#e74c3c';
+                tableHTML += `<td style="padding: 15px; text-align: center; color: ${color};">${value}</td>`;
+            });
+            tableHTML += '</tr>';
+            
+            // Action row
+            tableHTML += '<tr>';
+            tableHTML += '<td style="padding: 15px;"></td>';
+            compareProducts.forEach(p => {
+                tableHTML += `<td style="padding: 15px; text-align: center;">
+                    <button onclick="addToCart(${p.id}, event)" style="padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer;">Add to Cart</button>
+                </td>`;
+            });
+            tableHTML += '</tr>';
+            
+            tableHTML += '</table>';
+            
+            content.innerHTML = tableHTML;
+            modal.style.display = 'flex';
+        }
+
+        // Close compare modal
+        function closeCompareModal() {
+            document.getElementById('compareModal').style.display = 'none';
+        }
+
+        // Share product
+        function shareProduct(productId, event) {
+            event.stopPropagation();
+            const product = products.find(p => p.id === productId);
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: product.name,
+                    text: `Check out this amazing product: ${product.name}`,
+                    url: window.location.href,
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href + `?product=${productId}`);
+                showToast('Link copied to clipboard!', 'success');
+            }
+        }
+
+        // View product details
+        function viewProduct(productId) {
+            window.location.href = `product.html?id=${productId}`;
+            addToRecentlyViewed(productId);
+        }
+
+        // Add to recently viewed
+        function addToRecentlyViewed(productId) {
+            recentlyViewed = [productId, ...recentlyViewed.filter(id => id !== productId)].slice(0, 6);
+            localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+            loadRecentlyViewed();
+        }
+
+        // Load recently viewed
+        function loadRecentlyViewed() {
+            const container = document.getElementById('recentlyViewed');
+            const viewedProducts = recentlyViewed.map(id => products.find(p => p.id === id)).filter(p => p);
+            
+            container.innerHTML = viewedProducts.map(product => `
+                <div style="cursor: pointer;" onclick="viewProduct(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
+                    <p style="margin: 5px 0 0; font-size: 12px; color: #333;">${product.name.substring(0, 20)}...</p>
+                    <p style="margin: 0; font-size: 12px; font-weight: 600; color: #667eea;">$${product.price.toFixed(2)}</p>
+                </div>
+            `).join('');
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Update wishlist count
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+        }
+
+        // Filter functions
+        function applyFilters() {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-filter:checked')).map(cb => cb.value);
+            const selectedBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(cb => cb.value);
+            const selectedRating = document.querySelector('.rating-filter:checked')?.value;
+            const inStock = document.getElementById('inStock').checked;
+            const freeShipping = document.getElementById('freeShipping').checked;
+            const onSale = document.getElementById('onSale').checked;
+            const searchTerm = document.getElementById('filterSearch').value.toLowerCase();
+            const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+            
+            filteredProducts = products.filter(product => {
+                // Category filter
+                if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
+                    return false;
+                }
+                
+                // Brand filter
+                if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand)) {
+                    return false;
+                }
+                
+                // Rating filter
+                if (selectedRating && product.rating < parseFloat(selectedRating)) {
+                    return false;
+                }
+                
+                // Stock filter
+                if (inStock && product.stock === 0) {
+                    return false;
+                }
+                
+                // Free shipping filter
+                if (freeShipping && !product.freeShipping) {
+                    return false;
+                }
+                
+                // On sale filter
+                if (onSale && !product.discount) {
+                    return false;
+                }
+                
+                // Search filter
+                if (searchTerm && !product.name.toLowerCase().includes(searchTerm) && !product.brand.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+                
+                // Price filter
+                if (product.price < minPrice || product.price > maxPrice) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            currentPage = 1;
+            loadProducts();
+            updateActiveFilters();
+        }
+
+        // Update active filters display
+        function updateActiveFilters() {
+            const container = document.getElementById('activeFilters');
+            const tagsContainer = document.getElementById('filterTags');
+            
+            const selectedCategories = Array.from(document.querySelectorAll('.category-filter:checked')).map(cb => cb.value);
+            const selectedBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(cb => cb.value);
+            
+            if (selectedCategories.length === 0 && selectedBrands.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.style.display = 'block';
+            tagsContainer.innerHTML = '';
+            
+            selectedCategories.forEach(cat => {
+                tagsContainer.innerHTML += `
+                    <span class="filter-tag">
+                        ${cat}
+                        <button onclick="removeFilter('category', '${cat}')"><i class="fas fa-times"></i></button>
+                    </span>
+                `;
+            });
+            
+            selectedBrands.forEach(brand => {
+                tagsContainer.innerHTML += `
+                    <span class="filter-tag">
+                        ${brand}
+                        <button onclick="removeFilter('brand', '${brand}')"><i class="fas fa-times"></i></button>
+                    </span>
+                `;
+            });
+        }
+
+        // Remove filter
+        function removeFilter(type, value) {
+            if (type === 'category') {
+                document.querySelectorAll('.category-filter').forEach(cb => {
+                    if (cb.value === value) cb.checked = false;
+                });
+            } else if (type === 'brand') {
+                document.querySelectorAll('.brand-filter').forEach(cb => {
+                    if (cb.value === value) cb.checked = false;
+                });
+            }
+            applyFilters();
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.querySelectorAll('.category-filter, .brand-filter').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.rating-filter').forEach(rb => rb.checked = false);
+            document.getElementById('inStock').checked = false;
+            document.getElementById('freeShipping').checked = false;
+            document.getElementById('onSale').checked = false;
+            document.getElementById('filterSearch').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            document.getElementById('priceRange').value = 500;
+            document.getElementById('priceLabel').textContent = '$500';
+            
+            filteredProducts = [...products];
+            currentPage = 1;
+            loadProducts();
+            document.getElementById('activeFilters').style.display = 'none';
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            resetFilters();
+        }
+
+        // Update price label
+        function updatePriceLabel(value) {
+            document.getElementById('priceLabel').textContent = '$' + value;
+        }
+
+        // Sort products
+        function sortProducts(sortBy) {
+            switch(sortBy) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'rating':
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'newest':
+                    filteredProducts.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+                    break;
+                case 'popular':
+                    filteredProducts.sort((a, b) => b.reviews - a.reviews);
+                    break;
+                case 'discount':
+                    filteredProducts.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+                    break;
+                default:
+                    filteredProducts = [...products];
+            }
+            loadProducts();
+        }
+
+        // Set view (grid/list)
+        function setView(view) {
+            currentView = view;
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+            
+            if (view === 'grid') {
+                gridBtn.style.background = '#667eea';
+                gridBtn.style.color = 'white';
+                listBtn.style.background = 'white';
+                listBtn.style.color = '#666';
+            } else {
+                listBtn.style.background = '#667eea';
+                listBtn.style.color = 'white';
+                gridBtn.style.background = 'white';
+                gridBtn.style.color = '#666';
+            }
+            
+            loadProducts();
+        }
+
+        // Change items per page
+        function changeItemsPerPage(value) {
+            itemsPerPage = parseInt(value);
+            currentPage = 1;
+            loadProducts();
+        }
+
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            let html = '<button class="pagination-btn" onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    html += '<span style="margin: 0 5px;">...</span>';
+                }
+            }
+            
+            html += '<button class="pagination-btn" onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
+            
+            pagination.innerHTML = html;
+        }
+
+        // Change page
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                loadProducts();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Update results count
+        function updateResultsCount() {
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, filteredProducts.length);
+            
+            document.getElementById('resultsStart').textContent = filteredProducts.length ? start : 0;
+            document.getElementById('resultsEnd').textContent = filteredProducts.length ? end : 0;
+            document.getElementById('resultsTotal').textContent = filteredProducts.length;
+        }
+
+        // Update category and brand counts
+        function updateCounts() {
+            // Update wishlist count
+            updateWishlistCount();
+            
+            // Update cart count
+            updateCartCount();
+        }
+
+        // Show toast
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Initialize filters
+        function initFilters() {
+            // Price range input
+            document.getElementById('priceRange').addEventListener('input', (e) => {
+                document.getElementById('priceLabel').textContent = '$' + e.target.value;
+            });
+            
+            // Search input debounce
+            let searchTimeout;
+            document.getElementById('filterSearch').addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(applyFilters, 500);
+            });
+            
+            // Min/max price inputs
+            document.getElementById('minPrice').addEventListener('change', applyFilters);
+            document.getElementById('maxPrice').addEventListener('change', applyFilters);
+        }
+    </script>
 </body>
 </html>

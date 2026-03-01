@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Deals - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; min-height: 100vh;">
+
+    <!-- Header -->
+    <div style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <h1 style="margin: 0; font-size: 24px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    APSE <span style="font-weight: 300;">Deals</span>
+                </h1>
+            </div>
+            
+            <!-- Deal Timer -->
+            <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); padding: 8px 20px; border-radius: 30px; color: white; font-weight: 600;">
+                <i class="fas fa-clock"></i>
+                <span id="globalTimer">23:59:59</span>
+            </div>
+            
+            <div style="display: flex; gap: 25px; align-items: center;">
+                <a href="wishlist.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="far fa-heart" style="font-size: 22px;"></i>
+                    <span id="wishlistCount" style="position: absolute; top: -8px; right: -8px; background: #ff6b6b; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; color: #333; text-decoration: none;">
+                    <i class="fas fa-shopping-cart" style="font-size: 22px;"></i>
+                    <span id="cartCount" style="position: absolute; top: -8px; right: -8px; background: #ff6b6b; color: white; font-size: 11px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); padding: 80px 20px; text-align: center; position: relative; overflow: hidden;">
+        <!-- Animated Background -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1;">
+            <div style="position: absolute; top: 10%; left: 10%; width: 200px; height: 200px; background: white; border-radius: 50%; animation: float 6s infinite;"></div>
+            <div style="position: absolute; bottom: 10%; right: 10%; width: 150px; height: 150px; background: white; border-radius: 50%; animation: float 8s infinite reverse;"></div>
+            <div style="position: absolute; top: 50%; left: 50%; width: 100px; height: 100px; background: white; border-radius: 50%; animation: float 4s infinite;"></div>
+        </div>
+        
+        <div style="max-width: 800px; margin: 0 auto; position: relative;">
+            <h1 style="margin: 0; color: white; font-size: 64px; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                HOT DEALS
+            </h1>
+            <p style="color: white; font-size: 24px; margin: 20px 0; opacity: 0.9;">Save up to 70% on selected items</p>
+            
+            <!-- Flash Sale Countdown -->
+            <div style="background: rgba(255,255,255,0.2); border-radius: 15px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: white; margin: 0 0 20px 0;">Flash Sale Ends In</h3>
+                <div style="display: flex; justify-content: center; gap: 30px;">
+                    <div style="text-align: center;">
+                        <div style="background: white; width: 80px; height: 80px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; color: #ff6b6b; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="flashDays">00</div>
+                        <div style="color: white; margin-top: 10px; font-weight: 500;">Days</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: white; width: 80px; height: 80px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; color: #ff6b6b; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="flashHours">00</div>
+                        <div style="color: white; margin-top: 10px; font-weight: 500;">Hours</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: white; width: 80px; height: 80px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; color: #ff6b6b; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="flashMinutes">00</div>
+                        <div style="color: white; margin-top: 10px; font-weight: 500;">Minutes</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: white; width: 80px; height: 80px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; color: #ff6b6b; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" id="flashSeconds">00</div>
+                        <div style="color: white; margin-top: 10px; font-weight: 500;">Seconds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Deals Container -->
+    <div style="max-width: 1400px; margin: 40px auto; padding: 0 20px;">
+        
+        <!-- Deal Categories Tabs -->
+        <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <div style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px;">
+                <button onclick="filterDeals('all')" class="category-tab active" style="padding: 12px 25px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">All Deals</button>
+                <button onclick="filterDeals('flash')" class="category-tab" style="padding: 12px 25px; background: white; border: 2px solid #ff6b6b; color: #ff6b6b; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">⚡ Flash Sale</button>
+                <button onclick="filterDeals('clearance')" class="category-tab" style="padding: 12px 25px; background: white; border: 2px solid #ff6b6b; color: #ff6b6b; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">🏷️ Clearance</button>
+                <button onclick="filterDeals('bogo')" class="category-tab" style="padding: 12px 25px; background: white; border: 2px solid #ff6b6b; color: #ff6b6b; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">🎁 Buy 1 Get 1</button>
+                <button onclick="filterDeals('combo')" class="category-tab" style="padding: 12px 25px; background: white; border: 2px solid #ff6b6b; color: #ff6b6b; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">📦 Combo Offers</button>
+                <button onclick="filterDeals('members')" class="category-tab" style="padding: 12px 25px; background: white; border: 2px solid #ff6b6b; color: #ff6b6b; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap;">👑 Member Exclusive</button>
+            </div>
+        </div>
+
+        <!-- Deal Stats -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+            <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: #ff6b6b20; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-tags" style="font-size: 24px; color: #ff6b6b;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: 700; color: #333;" id="totalDeals">156</div>
+                    <div style="color: #666; font-size: 14px;">Active Deals</div>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: #ff8e5320; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-clock" style="font-size: 24px; color: #ff8e53;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: 700; color: #333;" id="flashDeals">24</div>
+                    <div style="color: #666; font-size: 14px;">Flash Sales</div>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: #4CAF5020; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-percent" style="font-size: 24px; color: #4CAF50;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: 700; color: #333;" id="avgDiscount">45%</div>
+                    <div style="color: #666; font-size: 14px;">Avg. Discount</div>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: #667eea20; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-users" style="font-size: 24px; color: #667eea;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: 700; color: #333;" id="savedToday">$12.5K</div>
+                    <div style="color: #666; font-size: 14px;">Saved Today</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Deal of the Day -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 40px; margin-bottom: 40px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: rgba(255,255,255,0.1); border-radius: 50%; transform: translate(100px, -100px);"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; transform: translate(-50px, 50px);"></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative;">
+                <div>
+                    <span style="background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 20px;">🎉 DEAL OF THE DAY</span>
+                    <h2 style="color: white; font-size: 42px; margin: 0 0 20px 0;">Sony WH-1000XM4</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 30px; line-height: 1.6;">Industry-leading noise cancellation with exceptional sound quality. Limited time offer!</p>
+                    
+                    <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 30px;">
+                        <div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">Was</div>
+                            <div style="color: rgba(255,255,255,0.5); font-size: 24px; text-decoration: line-through;">$399.99</div>
+                        </div>
+                        <div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">Now</div>
+                            <div style="color: white; font-size: 48px; font-weight: 700;">$279.99</div>
+                        </div>
+                        <div style="background: #ff6b6b; padding: 10px 20px; border-radius: 10px;">
+                            <span style="color: white; font-size: 24px; font-weight: 700;">-30%</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <button onclick="addToCart(1)" style="padding: 15px 40px; background: white; color: #667eea; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <i class="fas fa-shopping-cart"></i> Grab This Deal
+                        </button>
+                        <button onclick="quickView(1)" style="padding: 15px 30px; background: transparent; border: 2px solid white; color: white; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='#667eea'" onmouseout="this.style.background='transparent'; this.style.color='white'">
+                            Quick View
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Sony Headphones" style="max-width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    
+                    <!-- Limited Stock -->
+                    <div style="background: rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; color: white; margin-bottom: 10px;">
+                            <span>🔥 Limited Stock</span>
+                            <span>Only 12 left!</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.3); border-radius: 5px; overflow: hidden;">
+                            <div style="width: 30%; height: 100%; background: white; border-radius: 5px; animation: pulse 2s infinite;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Sale Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 32px; color: #333; margin: 0;">
+                    ⚡ Flash Sale
+                    <span style="font-size: 16px; background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; margin-left: 15px;">Ends in 02:15:30</span>
+                </h2>
+                <a href="#" style="color: #ff6b6b; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">View All →</a>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <!-- Flash Deal 1 -->
+                <div class="deal-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2;">-40%</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; animation: pulse 2s infinite;">⚡ FLASH</div>
+                    
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Smart Watch" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; font-size: 18px;">Smart Watch Series 7</h3>
+                        
+                        <div style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 10px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #ff6b6b;">$179.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$299.99</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 5px;">
+                                <span>Sold: 78%</span>
+                                <span>🔥 22 left</span>
+                            </div>
+                            <div style="width: 100%; height: 5px; background: #f0f0f0; border-radius: 5px;">
+                                <div style="width: 78%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ff8e53); border-radius: 5px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer -->
+                        <div style="background: #fff0f0; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
+                            <span style="color: #ff6b6b; font-weight: 600;">⏰ Ends in: 02:15:30</span>
+                        </div>
+                        
+                        <button onclick="addToCart(2)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(255,107,107,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <i class="fas fa-bolt"></i> Grab Flash Deal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Flash Deal 2 -->
+                <div class="deal-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2;">-35%</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; animation: pulse 2s infinite;">⚡ FLASH</div>
+                    
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Nike Shoes" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; font-size: 18px;">Nike Air Max 270</h3>
+                        
+                        <div style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 10px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #ff6b6b;">$129.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$199.99</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 5px;">
+                                <span>Sold: 92%</span>
+                                <span>🔥 8 left</span>
+                            </div>
+                            <div style="width: 100%; height: 5px; background: #f0f0f0; border-radius: 5px;">
+                                <div style="width: 92%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ff8e53); border-radius: 5px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #fff0f0; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
+                            <span style="color: #ff6b6b; font-weight: 600;">⏰ Ends in: 01:45:20</span>
+                        </div>
+                        
+                        <button onclick="addToCart(11)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <i class="fas fa-bolt"></i> Grab Flash Deal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Flash Deal 3 -->
+                <div class="deal-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2;">-50%</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; animation: pulse 2s infinite;">⚡ FLASH</div>
+                    
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Wireless Earbuds" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; font-size: 18px;">Sony WF-1000XM4</h3>
+                        
+                        <div style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 10px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #ff6b6b;">$139.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$279.99</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 5px;">
+                                <span>Sold: 65%</span>
+                                <span>🔥 35 left</span>
+                            </div>
+                            <div style="width: 100%; height: 5px; background: #f0f0f0; border-radius: 5px;">
+                                <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ff8e53); border-radius: 5px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #fff0f0; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
+                            <span style="color: #ff6b6b; font-weight: 600;">⏰ Ends in: 03:30:00</span>
+                        </div>
+                        
+                        <button onclick="addToCart(6)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <i class="fas fa-bolt"></i> Grab Flash Deal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Flash Deal 4 -->
+                <div class="deal-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; transition: all 0.3s;">
+                    <div style="position: absolute; top: 10px; left: 10px; background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2;">-45%</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; z-index: 2; animation: pulse 2s infinite;">⚡ FLASH</div>
+                    
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400" alt="Gaming Chair" style="width: 100%; height: 200px; object-fit: cover;">
+                    
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; font-size: 18px;">Gaming Chair Pro</h3>
+                        
+                        <div style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 10px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #ff6b6b;">$219.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$399.99</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 5px;">
+                                <span>Sold: 45%</span>
+                                <span>🔥 55 left</span>
+                            </div>
+                            <div style="width: 100%; height: 5px; background: #f0f0f0; border-radius: 5px;">
+                                <div style="width: 45%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ff8e53); border-radius: 5px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #fff0f0; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
+                            <span style="color: #ff6b6b; font-weight: 600;">⏰ Ends in: 04:20:00</span>
+                        </div>
+                        
+                        <button onclick="addToCart(32)" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <i class="fas fa-bolt"></i> Grab Flash Deal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clearance Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 32px; color: #333; margin: 0;">
+                    🏷️ Clearance Sale
+                    <span style="font-size: 16px; background: #4CAF50; color: white; padding: 5px 15px; border-radius: 20px; margin-left: 15px;">Up to 70% Off</span>
+                </h2>
+                <a href="#" style="color: #4CAF50; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">View All →</a>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px;">
+                <!-- Clearance Item 1 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.05)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400" alt="Camera" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-60%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">DSLR Camera</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$399</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$999</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clearance Item 2 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400" alt="Smart Watch" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-55%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">Smart Watch</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$89</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$199</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clearance Item 3 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400" alt="Sofa" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-70%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">3-Seater Sofa</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$449</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$1499</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clearance Item 4 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400" alt="Laptop" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-50%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">Gaming Laptop</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$799</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$1599</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clearance Item 5 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400" alt="Headphones" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-65%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">Bose Headphones</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$129</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$379</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clearance Item 6 -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=400" alt="Drone" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div style="position: absolute; top: 5px; right: 5px; background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600;">-40%</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 14px;">DJI Drone</h4>
+                        <div style="display: flex; gap: 5px; align-items: baseline;">
+                            <span style="font-size: 16px; font-weight: 700; color: #ff6b6b;">$599</span>
+                            <span style="font-size: 12px; color: #999; text-decoration: line-through;">$999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOGO Offers Section -->
+        <div style="margin-bottom: 50px;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 30px; margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <span style="background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 15px;">🎁 LIMITED TIME</span>
+                        <h2 style="color: white; font-size: 36px; margin: 0;">Buy 1 Get 1 Free</h2>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin-top: 10px;">On selected items + extra 20% off</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: white; border-radius: 15px; padding: 20px; width: 150px;">
+                            <span style="display: block; font-size: 14px; color: #666;">Use Code</span>
+                            <span style="display: block; font-size: 24px; font-weight: 700; color: #667eea; letter-spacing: 2px;">BOGO20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <!-- BOGO Item 1 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf3a9f?w=400" alt="Shoes" style="width: 150px; height: 150px; object-fit: cover;">
+                    <div style="padding: 20px; flex: 1;">
+                        <div style="background: #667eea; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; display: inline-block; margin-bottom: 10px;">BOGO</div>
+                        <h4 style="margin: 0 0 10px 0;">Running Shoes</h4>
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <span style="font-size: 20px; font-weight: 700; color: #ff6b6b;">$79.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$159.98</span>
+                        </div>
+                        <button onclick="addToCart(11)" style="margin-top: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Both</button>
+                    </div>
+                </div>
+                
+                <!-- BOGO Item 2 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" alt="Perfume" style="width: 150px; height: 150px; object-fit: cover;">
+                    <div style="padding: 20px; flex: 1;">
+                        <div style="background: #667eea; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; display: inline-block; margin-bottom: 10px;">BOGO</div>
+                        <h4 style="margin: 0 0 10px 0;">Designer Perfume</h4>
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <span style="font-size: 20px; font-weight: 700; color: #ff6b6b;">$89.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$179.98</span>
+                        </div>
+                        <button onclick="addToCart(25)" style="margin-top: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Both</button>
+                    </div>
+                </div>
+                
+                <!-- BOGO Item 3 -->
+                <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400" alt="Watch" style="width: 150px; height: 150px; object-fit: cover;">
+                    <div style="padding: 20px; flex: 1;">
+                        <div style="background: #667eea; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; display: inline-block; margin-bottom: 10px;">BOGO</div>
+                        <h4 style="margin: 0 0 10px 0;">Fashion Watches</h4>
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <span style="font-size: 20px; font-weight: 700; color: #ff6b6b;">$129.99</span>
+                            <span style="font-size: 14px; color: #999; text-decoration: line-through;">$259.98</span>
+                        </div>
+                        <button onclick="addToCart(2)" style="margin-top: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Both</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bundle Deals -->
+        <div style="margin-bottom: 50px;">
+            <h2 style="font-size: 32px; color: #333; margin-bottom: 20px;">📦 Bundle & Save More</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <!-- Bundle 1 -->
+                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; gap: 20px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200" alt="Product 1" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200" alt="Product 2" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf3a9f?w=200" alt="Product 3" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div style="background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">Save $150</div>
+                        <h3 style="margin: 0 0 10px 0;">Gaming Bundle</h3>
+                        <p style="color: #666; margin-bottom: 15px;">Includes: Headphones + Mouse + Keyboard + Mouse Pad</p>
+                        
+                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
+                            <div>
+                                <span style="font-size: 12px; color: #999;">Total Value</span>
+                                <div style="font-size: 14px; color: #999; text-decoration: line-through;">$399.99</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 12px; color: #999;">Bundle Price</span>
+                                <div style="font-size: 28px; font-weight: 700; color: #ff6b6b;">$249.99</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="addBundleToCart('gaming')" style="padding: 12px 25px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Add Bundle to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bundle 2 -->
+                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; gap: 20px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=200" alt="Product 1" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=200" alt="Product 2" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1631730359585-38a4935cbec4?w=200" alt="Product 3" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div style="background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">Save $80</div>
+                        <h3 style="margin: 0 0 10px 0;">Beauty Essentials</h3>
+                        <p style="color: #666; margin-bottom: 15px;">Includes: Perfume + Makeup Kit + Skincare Set + Brush Set</p>
+                        
+                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
+                            <div>
+                                <span style="font-size: 12px; color: #999;">Total Value</span>
+                                <div style="font-size: 14px; color: #999; text-decoration: line-through;">$279.99</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 12px; color: #999;">Bundle Price</span>
+                                <div style="font-size: 28px; font-weight: 700; color: #ff6b6b;">$199.99</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="addBundleToCart('beauty')" style="padding: 12px 25px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Add Bundle to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Exclusive Section -->
+        <div style="margin-bottom: 50px; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); border-radius: 20px; padding: 40px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                <div>
+                    <span style="background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 15px;">👑 MEMBERS ONLY</span>
+                    <h2 style="color: white; font-size: 42px; margin: 0;">Extra 20% Off</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin-top: 10px;">For premium members + free express shipping</p>
+                    
+                    <div style="display: flex; gap: 20px; margin-top: 30px;">
+                        <div style="text-align: center;">
+                            <div style="background: rgba(255,255,255,0.2); border-radius: 10px; padding: 15px;">
+                                <span style="display: block; color: white; font-size: 24px; font-weight: 700;">10K+</span>
+                                <span style="color: rgba(255,255,255,0.8);">Premium Members</span>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="background: rgba(255,255,255,0.2); border-radius: 10px; padding: 15px;">
+                                <span style="display: block; color: white; font-size: 24px; font-weight: 700;">$5M+</span>
+                                <span style="color: rgba(255,255,255,0.8);">Member Savings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="background: white; border-radius: 20px; padding: 30px; width: 250px;">
+                        <i class="fas fa-crown" style="font-size: 48px; color: #f1c40f;"></i>
+                        <h3 style="margin: 15px 0 10px 0;">Join Premium</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Get exclusive access to member-only deals</p>
+                        <button onclick="window.location.href='register.html'" style="padding: 12px 25px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%;">
+                            Join Now - $9.99/mo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deal Categories Grid -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px;">
+            <div style="background: white; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                <i class="fas fa-mobile-alt" style="font-size: 48px; color: #ff6b6b;"></i>
+                <h3 style="margin: 15px 0 10px 0;">Electronics</h3>
+                <p style="color: #666;">Up to 50% off</p>
+                <span style="color: #ff6b6b; font-weight: 600;">24 deals</span>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <i class="fas fa-tshirt" style="font-size: 48px; color: #ff8e53;"></i>
+                <h3 style="margin: 15px 0 10px 0;">Fashion</h3>
+                <p style="color: #666;">Buy 1 Get 1 Free</p>
+                <span style="color: #ff8e53; font-weight: 600;">36 deals</span>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <i class="fas fa-home" style="font-size: 48px; color: #667eea;"></i>
+                <h3 style="margin: 15px 0 10px 0;">Home</h3>
+                <p style="color: #666;">Up to 70% off</p>
+                <span style="color: #667eea; font-weight: 600;">18 deals</span>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <i class="fas fa-shoe-prints" style="font-size: 48px; color: #4CAF50;"></i>
+                <h3 style="margin: 15px 0 10px 0;">Sports</h3>
+                <p style="color: #666;">Clearance Sale</p>
+                <span style="color: #4CAF50; font-weight: 600;">22 deals</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalSlide 0.3s ease;">
+            <button onclick="closeQuickView()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; font-size: 24px; cursor: pointer; color: #666; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="quickViewContent" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 40px;">
+                <!-- Quick view content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; padding: 60px 0 20px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">About APSE Deals</h3>
+                    <p style="color: #bdc3c7; line-height: 1.8;">Your ultimate destination for the best deals and discounts. Save big on top brands with our exclusive offers.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 20px;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Deal Categories</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">⚡ Flash Sales</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">🏷️ Clearance</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">🎁 BOGO Offers</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">📦 Bundle Deals</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Customer Service</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">FAQ</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Shipping Policy</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Returns</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin: 0 0 20px 0; font-size: 20px;">Deal Alerts</h3>
+                    <p style="color: #bdc3c7; margin-bottom: 15px;">Get notified about our best deals</p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email" style="flex: 1; padding: 10px; border: none; border-radius: 5px; outline: none;">
+                        <button style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;" onmouseover="this.style.background='#ff5252'" onmouseout="this.style.background='#ff6b6b'">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #34495e;">
+                <p style="color: #bdc3c7; margin: 0;">&copy; 2026 APSE Deals. All rights reserved. Best deals guaranteed!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Styles -->
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .deal-card {
+            transition: all 0.3s;
+        }
+        
+        .deal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255,107,107,0.2) !important;
+        }
+        
+        .category-tab {
+            transition: all 0.3s;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            color: white;
+            border: none;
+        }
+        
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadeOut {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+        
+        @media (max-width: 1024px) {
+            div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(6, 1fr)"] {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            div[style*="grid-template-columns: repeat(2, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            div[style*="display: flex; gap: 30px;"] {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .flash-sale-timer {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // Product data for deals
+        const dealProducts = [
+            { id: 1, name: "Sony WH-1000XM4", price: 279.99, originalPrice: 399.99, discount: 30, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400", category: "electronics", stock: 12, dealType: "flash", soldPercentage: 78 },
+            { id: 2, name: "Smart Watch Series 7", price: 179.99, originalPrice: 299.99, discount: 40, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400", category: "electronics", stock: 22, dealType: "flash", soldPercentage: 65 },
+            { id: 3, name: "Nike Air Max 270", price: 129.99, originalPrice: 199.99, discount: 35, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", category: "fashion", stock: 8, dealType: "flash", soldPercentage: 92 },
+            { id: 4, name: "Sony WF-1000XM4", price: 139.99, originalPrice: 279.99, discount: 50, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400", category: "electronics", stock: 35, dealType: "flash", soldPercentage: 45 },
+            { id: 5, name: "Gaming Chair Pro", price: 219.99, originalPrice: 399.99, discount: 45, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400", category: "furniture", stock: 55, dealType: "flash", soldPercentage: 30 },
+            { id: 6, name: "DSLR Camera", price: 399.99, originalPrice: 999.99, discount: 60, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400", category: "electronics", stock: 15, dealType: "clearance", soldPercentage: 85 },
+            { id: 7, name: "3-Seater Sofa", price: 449.99, originalPrice: 1499.99, discount: 70, image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400", category: "furniture", stock: 8, dealType: "clearance", soldPercentage: 90 },
+            { id: 8, name: "Gaming Laptop", price: 799.99, originalPrice: 1599.99, discount: 50, image: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400", category: "electronics", stock: 12, dealType: "clearance", soldPercentage: 75 },
+            { id: 9, name: "Bose Headphones", price: 129.99, originalPrice: 379.99, discount: 65, image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400", category: "electronics", stock: 22, dealType: "clearance", soldPercentage: 60 },
+            { id: 10, name: "DJI Drone", price: 599.99, originalPrice: 999.99, discount: 40, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=400", category: "electronics", stock: 18, dealType: "clearance", soldPercentage: 55 },
+            { id: 11, name: "Running Shoes", price: 79.99, originalPrice: 159.98, discount: 50, image: "https://images.unsplash.com/photo-1546435770-a3e426bf3a9f?w=400", category: "fashion", dealType: "bogo", bogo: true },
+            { id: 12, name: "Designer Perfume", price: 89.99, originalPrice: 179.98, discount: 50, image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400", category: "beauty", dealType: "bogo", bogo: true },
+            { id: 13, name: "Fashion Watches", price: 129.99, originalPrice: 259.98, discount: 50, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400", category: "fashion", dealType: "bogo", bogo: true }
+        ];
+
+        // Cart and wishlist data
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        // Countdown timers
+        let flashEndTime = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours from now
+        let globalEndTime = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // 3 days from now
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            startCountdowns();
+            updateDealStats();
+        });
+
+        // Update cart and wishlist counts
+        function updateCounts() {
+            const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = cartCount;
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+        }
+
+        // Start all countdown timers
+        function startCountdowns() {
+            // Global timer
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = globalEndTime - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('globalTimer').textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+            
+            // Flash sale timer
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = flashEndTime - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('flashDays').textContent = days.toString().padStart(2, '0');
+                document.getElementById('flashHours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('flashMinutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('flashSeconds').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Update deal statistics
+        function updateDealStats() {
+            document.getElementById('totalDeals').textContent = dealProducts.length;
+            document.getElementById('flashDeals').textContent = dealProducts.filter(p => p.dealType === 'flash').length;
+            
+            const avgDiscount = Math.round(dealProducts.reduce((sum, p) => sum + p.discount, 0) / dealProducts.length);
+            document.getElementById('avgDiscount').textContent = avgDiscount + '%';
+            
+            // Calculate total savings (simulated)
+            const totalSaved = dealProducts.reduce((sum, p) => sum + (p.originalPrice - p.price), 0);
+            document.getElementById('savedToday').textContent = '$' + (totalSaved / 1000).toFixed(1) + 'K';
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = dealProducts.find(p => p.id === productId);
+            
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: productId, quantity: 1, price: product.price, name: product.name, image: product.image });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCounts();
+            showToast(`${product.name} added to cart!`, 'success');
+        }
+
+        // Add bundle to cart
+        function addBundleToCart(bundleType) {
+            if (bundleType === 'gaming') {
+                addToCart(1); // Headphones
+                addToCart(8); // Laptop (simulated)
+                addToCart(4); // Mouse (simulated)
+                showToast('Gaming bundle added to cart!', 'success');
+            } else if (bundleType === 'beauty') {
+                addToCart(12); // Perfume
+                addToCart(25); // Makeup (simulated)
+                showToast('Beauty bundle added to cart!', 'success');
+            }
+        }
+
+        // Quick view
+        function quickView(productId) {
+            const product = dealProducts.find(p => p.id === productId);
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+            
+            content.innerHTML = `
+                <div>
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; border-radius: 10px;">
+                </div>
+                <div>
+                    <span style="background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 15px;">-${product.discount}% OFF</span>
+                    <h2 style="margin: 0 0 15px 0;">${product.name}</h2>
+                    <div style="font-size: 36px; font-weight: 700; color: #ff6b6b; margin-bottom: 15px;">$${product.price}</div>
+                    <div style="color: #999; margin-bottom: 20px;">Was: <span style="text-decoration: line-through;">$${product.originalPrice}</span></div>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">Amazing deal on this premium product. Limited stock available!</p>
+                    <button onclick="addToCart(${product.id}); closeQuickView()" style="padding: 15px 40px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%;">
+                        Grab This Deal
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        // Close quick view
+        function closeQuickView() {
+            document.getElementById('quickViewModal').style.display = 'none';
+        }
+
+        // Filter deals
+        function filterDeals(type) {
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.background = 'white';
+                tab.style.color = '#ff6b6b';
+            });
+            
+            event.target.classList.add('active');
+            event.target.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%)';
+            event.target.style.color = 'white';
+            
+            // Filter logic would go here
+            showToast(`Showing ${type} deals`, 'info');
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('quickViewModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

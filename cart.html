@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; min-height: 100vh;">
+
+    <!-- Header -->
+    <div style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <!-- Logo -->
+            <div onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <h1 style="margin: 0; font-size: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    APSE <span style="font-weight: 300;">Shopping</span>
+                </h1>
+            </div>
+            
+            <!-- Navigation -->
+            <div style="display: flex; gap: 30px;">
+                <a href="index.html" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#333'">Home</a>
+                <a href="shop.html" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#333'">Shop</a>
+                <a href="categories.html" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#333'">Categories</a>
+                <a href="contact.html" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#333'">Contact</a>
+            </div>
+            
+            <!-- Cart Icon -->
+            <div style="position: relative; cursor: pointer;" onclick="window.location.href='cart.html'">
+                <i class="fas fa-shopping-cart" style="font-size: 24px; color: #333;"></i>
+                <span id="headerCartCount" style="position: absolute; top: -8px; right: -8px; background: #e74c3c; color: white; font-size: 12px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Title -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 0; text-align: center;">
+        <h1 style="margin: 0; color: white; font-size: 42px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Shopping Cart</h1>
+        <div style="margin-top: 10px; color: rgba(255,255,255,0.8);">
+            <a href="index.html" style="color: white; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Home</a>
+            <span style="margin: 0 10px;">/</span>
+            <span>Cart</span>
+        </div>
+    </div>
+
+    <!-- Main Cart Container -->
+    <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <div id="cartContainer" style="display: grid; grid-template-columns: 1fr 350px; gap: 30px;">
+            <!-- Cart Items Section -->
+            <div>
+                <!-- Cart Header -->
+                <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h2 style="margin: 0; font-size: 24px; color: #333;">Your Cart</h2>
+                        <p style="margin: 5px 0 0; color: #666; font-size: 14px;"><span id="itemCount">0</span> items</p>
+                    </div>
+                    <button onclick="clearCart()" id="clearCartBtn" style="padding: 10px 20px; background: #fff; border: 2px solid #e74c3c; color: #e74c3c; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: none;" onmouseover="this.style.background='#e74c3c'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='#e74c3c'">
+                        <i class="fas fa-trash"></i> Clear Cart
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cartItems" style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 300px;">
+                    <!-- Cart items will be loaded here dynamically -->
+                </div>
+
+                <!-- Continue Shopping -->
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="shop.html" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: white; border-radius: 10px; text-decoration: none; color: #667eea; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-arrow-left"></i>
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order Summary Sidebar -->
+            <div>
+                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: sticky; top: 100px;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 22px; color: #333; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0;">Order Summary</h3>
+                    
+                    <!-- Summary Details -->
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #666;">Subtotal</span>
+                            <span style="font-weight: 600; color: #333;" id="subtotal">$0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #666;">Shipping</span>
+                            <span style="font-weight: 600; color: #333;" id="shipping">$0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #666;">Tax (8%)</span>
+                            <span style="font-weight: 600; color: #333;" id="tax">$0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding: 15px 0; border-top: 2px dashed #e0e0e0; border-bottom: 2px dashed #e0e0e0;">
+                            <span style="font-size: 18px; font-weight: 700; color: #333;">Total</span>
+                            <span style="font-size: 24px; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="total">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Promo Code -->
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 10px; color: #666; font-weight: 500;">Promo Code</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="promoCode" placeholder="Enter code" style="flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                            <button onclick="applyPromoCode()" style="padding: 12px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#5a67d8'" onmouseout="this.style.background='#667eea'">
+                                Apply
+                            </button>
+                        </div>
+                        <div id="promoMessage" style="font-size: 12px; margin-top: 5px; display: none;"></div>
+                    </div>
+                    
+                    <!-- Checkout Button -->
+                    <button onclick="proceedToCheckout()" id="checkoutBtn" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <i class="fas fa-lock"></i>
+                        Proceed to Checkout
+                    </button>
+                    
+                    <!-- Payment Methods -->
+                    <div style="text-align: center;">
+                        <p style="color: #999; font-size: 12px; margin-bottom: 10px;">We Accept</p>
+                        <div style="display: flex; justify-content: center; gap: 15px;">
+                            <i class="fab fa-cc-visa" style="font-size: 30px; color: #1a1f71;"></i>
+                            <i class="fab fa-cc-mastercard" style="font-size: 30px; color: #eb001b;"></i>
+                            <i class="fab fa-cc-amex" style="font-size: 30px; color: #2e77bb;"></i>
+                            <i class="fab fa-cc-paypal" style="font-size: 30px; color: #003087;"></i>
+                            <i class="fab fa-cc-discover" style="font-size: 30px; color: #ff6000;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart Modal -->
+    <div id="emptyCartModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; animation: modalSlide 0.3s ease;">
+            <div style="width: 80px; height: 80px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                <i class="fas fa-shopping-cart" style="font-size: 40px; color: white;"></i>
+            </div>
+            <h3 style="font-size: 24px; margin-bottom: 10px; color: #333;">Your cart is empty!</h3>
+            <p style="color: #666; margin-bottom: 25px;">Looks like you haven't added anything to your cart yet.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="closeEmptyModal()" style="padding: 12px 25px; background: #f0f0f0; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">
+                    Close
+                </button>
+                <a href="shop.html" style="padding: 12px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                    Start Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Item Confirmation Modal -->
+    <div id="removeModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 350px; text-align: center; animation: modalSlide 0.3s ease;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 50px; color: #f39c12; margin-bottom: 15px;"></i>
+            <h3 style="font-size: 20px; margin-bottom: 10px;">Remove Item?</h3>
+            <p style="color: #666; margin-bottom: 20px;">Are you sure you want to remove this item from your cart?</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="confirmRemove()" style="padding: 10px 25px; background: #e74c3c; color: white; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;" onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'">
+                    Yes, Remove
+                </button>
+                <button onclick="cancelRemove()" style="padding: 10px 25px; background: #f0f0f0; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; padding: 40px 0 20px; margin-top: 60px;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px;">About Us</h3>
+                    <p style="color: #bdc3c7; line-height: 1.6;">Your one-stop shop for everything. Quality products at great prices with excellent customer service.</p>
+                </div>
+                <div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="about.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">About Us</a></li>
+                        <li style="margin-bottom: 10px;"><a href="contact.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Contact</a></li>
+                        <li style="margin-bottom: 10px;"><a href="faq.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px;">Customer Service</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="shipping.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Shipping Info</a></li>
+                        <li style="margin-bottom: 10px;"><a href="returns.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Returns</a></li>
+                        <li style="margin-bottom: 10px;"><a href="privacy.html" style="color: #bdc3c7; text-decoration: none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#bdc3c7'">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px;">Contact Info</h3>
+                    <ul style="list-style: none; padding: 0; color: #bdc3c7;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Shopping St, NY</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 234 567 890</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-envelope" style="margin-right: 10px;"></i> support@apseshopping.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #34495e; color: #bdc3c7;">
+                <p>&copy; 2026 APSE Shopping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Styles -->
+    <style>
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .cart-item {
+            animation: slideIn 0.3s ease;
+            transition: all 0.3s;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .quantity-btn {
+            transition: all 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .remove-btn:hover {
+            color: #e74c3c;
+            transform: scale(1.1);
+        }
+        
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadeOut {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+        
+        .price-update {
+            animation: pulse 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #cartContainer {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr !important;
+            }
+            
+            .cart-item-actions {
+                grid-column: span 2 !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample product data (in real app, this would come from a database)
+        const sampleProducts = [
+            {
+                id: 1,
+                name: "Wireless Headphones",
+                price: 99.99,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200",
+                category: "Electronics",
+                stock: 10
+            },
+            {
+                id: 2,
+                name: "Smart Watch",
+                price: 299.99,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200",
+                category: "Electronics",
+                stock: 5
+            },
+            {
+                id: 3,
+                name: "Running Shoes",
+                price: 79.99,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200",
+                category: "Sports",
+                stock: 15
+            },
+            {
+                id: 4,
+                name: "Leather Backpack",
+                price: 149.99,
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200",
+                category: "Fashion",
+                stock: 8
+            }
+        ];
+
+        // Cart data
+        let cart = [];
+        let itemToRemove = null;
+
+        // Initialize cart
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            updateHeaderCartCount();
+        });
+
+        // Load cart from localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            } else {
+                // Add sample items for demo
+                cart = [
+                    { id: 1, quantity: 2 },
+                    { id: 2, quantity: 1 },
+                    { id: 3, quantity: 1 }
+                ];
+                saveCart();
+            }
+            renderCart();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateHeaderCartCount();
+        }
+
+        // Update header cart count
+        function updateHeaderCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('headerCartCount').textContent = count;
+        }
+
+        // Render cart items
+        function renderCart() {
+            const cartContainer = document.getElementById('cartItems');
+            const itemCountSpan = document.getElementById('itemCount');
+            const clearCartBtn = document.getElementById('clearCartBtn');
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <i class="fas fa-shopping-cart" style="font-size: 80px; color: #e0e0e0; margin-bottom: 20px;"></i>
+                        <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">Your cart is empty</h3>
+                        <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added anything to your cart yet.</p>
+                        <a href="shop.html" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            Start Shopping
+                        </a>
+                    </div>
+                `;
+                itemCountSpan.textContent = '0';
+                clearCartBtn.style.display = 'none';
+                updateSummary();
+                return;
+            }
+
+            clearCartBtn.style.display = 'block';
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            itemCountSpan.textContent = totalItems;
+
+            let cartHTML = '';
+            cart.forEach(item => {
+                const product = sampleProducts.find(p => p.id === item.id);
+                if (product) {
+                    cartHTML += createCartItemHTML(product, item.quantity);
+                }
+            });
+
+            cartContainer.innerHTML = cartHTML;
+            updateSummary();
+        }
+
+        // Create cart item HTML
+        function createCartItemHTML(product, quantity) {
+            const itemTotal = product.price * quantity;
+            
+            return `
+                <div class="cart-item" data-product-id="${product.id}" style="display: grid; grid-template-columns: 100px 1fr auto; gap: 20px; padding: 20px; border-bottom: 1px solid #f0f0f0; transition: all 0.3s;">
+                    <!-- Product Image -->
+                    <div style="width: 100px; height: 100px; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="viewProduct(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 16px; color: #333; cursor: pointer;" onclick="viewProduct(${product.id})" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#333'">${product.name}</h4>
+                        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">${product.category}</p>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span style="font-weight: 700; color: #667eea; font-size: 18px;">$${product.price.toFixed(2)}</span>
+                            <span style="color: #27ae60; font-size: 12px;"><i class="fas fa-check-circle"></i> In Stock</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantity and Actions -->
+                    <div class="cart-item-actions" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button class="quantity-btn" onclick="updateQuantity(${product.id}, ${quantity - 1})" style="width: 35px; height: 35px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer; transition: all 0.3s;" ${quantity <= 1 ? 'disabled' : ''}>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span style="font-weight: 600; min-width: 30px; text-align: center;">${quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${product.id}, ${quantity + 1})" style="width: 35px; height: 35px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer; transition: all 0.3s;" ${quantity >= product.stock ? 'disabled' : ''}>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 15px; margin-top: 10px;">
+                            <span style="font-weight: 700; color: #333;">$${itemTotal.toFixed(2)}</span>
+                            <button class="remove-btn" onclick="showRemoveModal(${product.id})" style="background: none; border: none; color: #999; cursor: pointer; font-size: 18px; transition: all 0.3s;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#999'">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update quantity
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity < 1) {
+                showRemoveModal(productId);
+                return;
+            }
+            
+            const product = sampleProducts.find(p => p.id === productId);
+            if (newQuantity > product.stock) {
+                showToast(`Only ${product.stock} items available`, 'error');
+                return;
+            }
+            
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity = newQuantity;
+                saveCart();
+                renderCart();
+                showToast('Cart updated', 'success');
+            }
+        }
+
+        // Show remove confirmation modal
+        function showRemoveModal(productId) {
+            itemToRemove = productId;
+            document.getElementById('removeModal').style.display = 'flex';
+        }
+
+        // Confirm remove
+        function confirmRemove() {
+            if (itemToRemove) {
+                cart = cart.filter(item => item.id !== itemToRemove);
+                saveCart();
+                renderCart();
+                showToast('Item removed from cart', 'info');
+            }
+            cancelRemove();
+        }
+
+        // Cancel remove
+        function cancelRemove() {
+            document.getElementById('removeModal').style.display = 'none';
+            itemToRemove = null;
+        }
+
+        // Clear cart
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                saveCart();
+                renderCart();
+                showToast('Cart cleared', 'info');
+            }
+        }
+
+        // Update order summary
+        function updateSummary() {
+            const subtotal = cart.reduce((sum, item) => {
+                const product = sampleProducts.find(p => p.id === item.id);
+                return sum + (product ? product.price * item.quantity : 0);
+            }, 0);
+            
+            const shipping = subtotal > 99 ? 0 : 10;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            // Animate price updates
+            document.getElementById('subtotal').classList.add('price-update');
+            document.getElementById('shipping').classList.add('price-update');
+            document.getElementById('tax').classList.add('price-update');
+            document.getElementById('total').classList.add('price-update');
+            
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            
+            setTimeout(() => {
+                document.getElementById('subtotal').classList.remove('price-update');
+                document.getElementById('shipping').classList.remove('price-update');
+                document.getElementById('tax').classList.remove('price-update');
+                document.getElementById('total').classList.remove('price-update');
+            }, 300);
+        }
+
+        // Apply promo code
+        function applyPromoCode() {
+            const code = document.getElementById('promoCode').value.toUpperCase();
+            const messageDiv = document.getElementById('promoMessage');
+            
+            const promoCodes = {
+                'SAVE10': 10,
+                'SAVE20': 20,
+                'WELCOME': 15
+            };
+            
+            if (promoCodes[code]) {
+                const discount = promoCodes[code];
+                const subtotal = cart.reduce((sum, item) => {
+                    const product = sampleProducts.find(p => p.id === item.id);
+                    return sum + (product ? product.price * item.quantity : 0);
+                }, 0);
+                
+                const discountedTotal = subtotal * (1 - discount/100);
+                
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = '#27ae60';
+                messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${discount}% discount applied! New total: $${discountedTotal.toFixed(2)}`;
+                
+                showToast(`Promo code applied! You saved $${(subtotal - discountedTotal).toFixed(2)}`, 'success');
+            } else {
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = '#e74c3c';
+                messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid promo code';
+                showToast('Invalid promo code', 'error');
+            }
+        }
+
+        // Proceed to checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                document.getElementById('emptyCartModal').style.display = 'flex';
+                return;
+            }
+            
+            // Check if user is logged in
+            const user = localStorage.getItem('user');
+            if (!user) {
+                showToast('Please login to checkout', 'info');
+                setTimeout(() => {
+                    window.location.href = 'login.html?redirect=cart.html';
+                }, 1500);
+                return;
+            }
+            
+            window.location.href = 'checkout.html';
+        }
+
+        // Close empty cart modal
+        function closeEmptyModal() {
+            document.getElementById('emptyCartModal').style.display = 'none';
+        }
+
+        // View product details
+        function viewProduct(productId) {
+            window.location.href = `product.html?id=${productId}`;
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const emptyModal = document.getElementById('emptyCartModal');
+            const removeModal = document.getElementById('removeModal');
+            
+            if (event.target === emptyModal) {
+                emptyModal.style.display = 'none';
+            }
+            if (event.target === removeModal) {
+                removeModal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

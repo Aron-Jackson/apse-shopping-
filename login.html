@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - APSE Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+    <!-- Main Container -->
+    <div style="max-width: 1100px; width: 90%; margin: 20px auto; display: grid; grid-template-columns: 1fr 1fr; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideIn 0.5s ease;">
+        
+        <!-- Left Side - Welcome Section -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px; color: white; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="font-size: 36px; margin-bottom: 20px; font-weight: 700;">Welcome Back!</h1>
+            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 30px; opacity: 0.9;">Login to access your account dashboard, manage orders, and enjoy personalized shopping experience.</p>
+            
+            <!-- Benefits List -->
+            <div style="margin-top: 30px;">
+                <div style="display: flex; align-items: center; margin-bottom: 20px; animation: slideRight 0.5s ease 0.2s both;">
+                    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                        <i class="fas fa-box-open" style="font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; font-size: 16px;">Track Your Orders</h4>
+                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">Real-time order tracking</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; margin-bottom: 20px; animation: slideRight 0.5s ease 0.4s both;">
+                    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                        <i class="fas fa-heart" style="font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; font-size: 16px;">Saved Wishlist</h4>
+                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">Access your favorite items</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; margin-bottom: 20px; animation: slideRight 0.5s ease 0.6s both;">
+                    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                        <i class="fas fa-tag" style="font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; font-size: 16px;">Exclusive Offers</h4>
+                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">Member-only discounts</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial -->
+            <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; font-style: italic;">
+                <i class="fas fa-quote-left" style="opacity: 0.5; margin-right: 10px;"></i>
+                The dashboard makes it so easy to track my orders and manage returns.
+                <div style="margin-top: 10px; font-weight: 600;">- Sarah Johnson</div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div style="padding: 50px; background: white;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 32px; color: #333; margin-bottom: 10px;">Login to Your Account</h2>
+                <p style="color: #666; font-size: 14px;">Welcome back! Please enter your details.</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <!-- Email Field -->
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; color: #555; font-weight: 500; font-size: 14px;">
+                        <i class="fas fa-envelope" style="margin-right: 8px; color: #667eea;"></i>
+                        Email Address
+                    </label>
+                    <div style="position: relative;">
+                        <input 
+                            type="email" 
+                            id="email"
+                            value="john.doe@example.com"
+                            placeholder="Enter your email"
+                            style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 15px; transition: all 0.3s; outline: none; box-sizing: border-box;"
+                            onfocus="this.style.borderColor='#667eea'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            required
+                        >
+                        <i class="fas fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                    </div>
+                    <div id="emailError" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                </div>
+                
+                <!-- Password Field -->
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 8px; color: #555; font-weight: 500; font-size: 14px;">
+                        <i class="fas fa-lock" style="margin-right: 8px; color: #667eea;"></i>
+                        Password
+                    </label>
+                    <div style="position: relative;">
+                        <input 
+                            type="password" 
+                            id="password"
+                            value="password123"
+                            placeholder="Enter your password"
+                            style="width: 100%; padding: 15px 45px 15px 45px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 15px; transition: all 0.3s; outline: none; box-sizing: border-box;"
+                            onfocus="this.style.borderColor='#667eea'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            required
+                        >
+                        <i class="fas fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                        <i 
+                            class="fas fa-eye" 
+                            id="togglePassword"
+                            style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #999; cursor: pointer;"
+                            onclick="togglePasswordVisibility()"
+                        ></i>
+                    </div>
+                    <div id="passwordError" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                </div>
+                
+                <!-- Demo Credentials Hint -->
+                <div style="background: #f0f8ff; padding: 12px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid #667eea;">
+                    <p style="margin: 0; font-size: 13px; color: #666;">
+                        <i class="fas fa-info-circle" style="color: #667eea;"></i> 
+                        Demo credentials: <strong>john.doe@example.com</strong> / <strong>password123</strong>
+                    </p>
+                </div>
+                
+                <!-- Remember Me & Forgot Password -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <label style="display: flex; align-items: center; color: #666; font-size: 14px; cursor: pointer;">
+                        <input 
+                            type="checkbox" 
+                            id="remember"
+                            style="margin-right: 8px; width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;"
+                        >
+                        Remember me
+                    </label>
+                    <a 
+                        href="#" 
+                        style="color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500;"
+                        onmouseover="this.style.textDecoration='underline'"
+                        onmouseout="this.style.textDecoration='none'"
+                        onclick="showForgotPassword(event)"
+                    >
+                        Forgot Password?
+                    </a>
+                </div>
+                
+                <!-- Login Button -->
+                <button 
+                    type="submit"
+                    style="width: 100%; padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(102,126,234,0.4)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                >
+                    <span id="buttonText">Login</span>
+                    <span id="buttonSpinner" style="display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+                
+                <!-- Social Login -->
+                <div style="position: relative; text-align: center; margin: 30px 0;">
+                    <span style="background: white; padding: 0 15px; color: #999; font-size: 14px; position: relative; z-index: 1;">Or continue with</span>
+                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #e0e0e0; z-index: 0;"></div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <button 
+                        type="button"
+                        onclick="handleSocialLogin('google')"
+                        style="padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 500; color: #333; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;"
+                        onmouseover="this.style.borderColor='#DB4437'"
+                        onmouseout="this.style.borderColor='#e0e0e0'"
+                    >
+                        <i class="fab fa-google" style="color: #DB4437; font-size: 18px;"></i>
+                        Google
+                    </button>
+                    
+                    <button 
+                        type="button"
+                        onclick="handleSocialLogin('facebook')"
+                        style="padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 500; color: #333; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;"
+                        onmouseover="this.style.borderColor='#4267B2'"
+                        onmouseout="this.style.borderColor='#e0e0e0'"
+                    >
+                        <i class="fab fa-facebook" style="color: #4267B2; font-size: 18px;"></i>
+                        Facebook
+                    </button>
+                </div>
+                
+                <!-- Sign Up Link -->
+                <p style="text-align: center; margin-top: 25px; color: #666; font-size: 14px;">
+                    Don't have an account? 
+                    <a 
+                        href="register.html" 
+                        style="color: #667eea; text-decoration: none; font-weight: 600;"
+                        onmouseover="this.style.textDecoration='underline'"
+                        onmouseout="this.style.textDecoration='none'"
+                    >
+                        Sign up
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; position: relative; animation: modalSlide 0.3s ease;">
+            <button onclick="hideForgotModal()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+            <h3 style="font-size: 24px; margin-bottom: 10px; color: #333;">Reset Password</h3>
+            <p style="color: #666; margin-bottom: 25px;">Enter your email and we'll send you a reset link.</p>
+            
+            <input 
+                type="email" 
+                id="resetEmail"
+                placeholder="Enter your email"
+                style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; margin-bottom: 20px; font-size: 15px; box-sizing: border-box;"
+                onfocus="this.style.borderColor='#667eea'"
+                onblur="this.style.borderColor='#e0e0e0'"
+            >
+            
+            <button 
+                onclick="sendResetLink()"
+                style="width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer;"
+                onmouseover="this.style.opacity='0.9'"
+                onmouseout="this.style.opacity='1'"
+            >
+                Send Reset Link
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="visibility: hidden; min-width: 250px; background: #333; color: white; text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);"></div>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease;
+        }
+        
+        #toast.show {
+            visibility: visible;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadeOut {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+        
+        @media (max-width: 768px) {
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            div[style*="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"] {
+                display: none;
+            }
+        }
+    </style>
+
+    <script>
+        // User database (in real app, this would be on server)
+        const users = JSON.parse(localStorage.getItem('users')) || [
+            {
+                id: 1,
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'john.doe@example.com',
+                password: 'password123',
+                avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+                joinDate: '2024-01-15',
+                orders: [
+                    { id: 'ORD-001', date: '2024-02-01', total: 299.99, status: 'delivered' },
+                    { id: 'ORD-002', date: '2024-02-15', total: 149.99, status: 'shipped' }
+                ],
+                wishlist: [1, 3, 5],
+                addresses: [
+                    {
+                        type: 'home',
+                        street: '123 Main St',
+                        city: 'New York',
+                        state: 'NY',
+                        zip: '10001',
+                        isDefault: true
+                    }
+                ],
+                paymentMethods: [
+                    {
+                        type: 'visa',
+                        last4: '4242',
+                        expiry: '12/25',
+                        isDefault: true
+                    }
+                ]
+            }
+        ];
+
+        // Save default users if not exists
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Show forgot password modal
+        function showForgotPassword(event) {
+            event.preventDefault();
+            document.getElementById('forgotModal').style.display = 'flex';
+        }
+
+        // Hide forgot password modal
+        function hideForgotModal() {
+            document.getElementById('forgotModal').style.display = 'none';
+        }
+
+        // Send reset link
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value;
+            
+            if (!email || !validateEmail(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Check if email exists
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email);
+            
+            if (user) {
+                showToast('Reset link sent to your email!', 'success');
+                setTimeout(() => {
+                    hideForgotModal();
+                }, 2000);
+            } else {
+                showToast('Email not found in our system', 'error');
+            }
+        }
+
+        // Validate email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#ff9800';
+            toast.className = 'show';
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const button = event.target.querySelector('button[type="submit"]');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            let isValid = true;
+            
+            // Reset errors
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('email').style.borderColor = '#e0e0e0';
+            document.getElementById('password').style.borderColor = '#e0e0e0';
+            
+            // Validate email
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').style.borderColor = '#e74c3c';
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email';
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').style.borderColor = '#e74c3c';
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Password is required';
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('password').style.borderColor = '#e74c3c';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                document.querySelector('.login-container')?.classList.add('shake');
+                setTimeout(() => {
+                    document.querySelector('.login-container')?.classList.remove('shake');
+                }, 500);
+                return;
+            }
+            
+            // Show loading state
+            buttonText.textContent = 'Logging in...';
+            buttonSpinner.style.display = 'inline';
+            button.disabled = true;
+            button.style.opacity = '0.7';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // Find user
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Remove password before storing in session
+                    const { password, ...userWithoutPassword } = user;
+                    
+                    // Create session
+                    const session = {
+                        user: userWithoutPassword,
+                        token: 'token_' + Math.random().toString(36).substr(2, 9),
+                        loginTime: new Date().toISOString(),
+                        remember: remember
+                    };
+                    
+                    // Store session
+                    if (remember) {
+                        localStorage.setItem('currentUser', JSON.stringify(session));
+                    } else {
+                        sessionStorage.setItem('currentUser', JSON.stringify(session));
+                    }
+                    
+                    showToast('Login successful! Redirecting to dashboard...', 'success');
+                    
+                    // Redirect to account dashboard
+                    setTimeout(() => {
+                        window.location.href = 'account.html';
+                    }, 1500);
+                } else {
+                    showToast('Invalid email or password', 'error');
+                    
+                    // Reset button
+                    buttonText.textContent = 'Login';
+                    buttonSpinner.style.display = 'none';
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                }
+            }, 1500);
+        }
+
+        // Handle social login
+        function handleSocialLogin(provider) {
+            showToast(`Logging in with ${provider}...`, 'info');
+            
+            // Simulate social login
+            setTimeout(() => {
+                // Create social user
+                const socialUser = {
+                    id: Date.now(),
+                    firstName: provider === 'google' ? 'Google' : 'Facebook',
+                    lastName: 'User',
+                    email: `user@${provider}.com`,
+                    avatar: `https://randomuser.me/api/portraits/${provider === 'google' ? 'men' : 'women'}/${Math.floor(Math.random() * 50)}.jpg`,
+                    joinDate: new Date().toISOString().split('T')[0],
+                    provider: provider,
+                    orders: [],
+                    wishlist: [],
+                    addresses: [],
+                    paymentMethods: []
+                };
+                
+                // Create session
+                const session = {
+                    user: socialUser,
+                    token: 'token_' + Math.random().toString(36).substr(2, 9),
+                    loginTime: new Date().toISOString(),
+                    provider: provider
+                };
+                
+                sessionStorage.setItem('currentUser', JSON.stringify(session));
+                
+                showToast('Login successful! Redirecting to dashboard...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'account.html';
+                }, 1500);
+            }, 1500);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotModal');
+            if (event.target === modal) {
+                hideForgotModal();
+            }
+        };
+
+        // Check if already logged in
+        window.addEventListener('load', () => {
+            const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (currentUser) {
+                // Redirect to account if already logged in
+                window.location.href = 'account.html';
+            }
+        });
+    </script>
+</body>
+</html>
